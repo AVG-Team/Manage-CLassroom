@@ -1,4 +1,4 @@
-<section id="hero" class="w-full">
+<section id="hero" class="w-full" data-oas="fade-right">
     <div class="relative grid max-w-screen-xl grid-cols-12 px-4 mx-auto overflow-hidden sm:px-8 gap-x-6" v-bind="$attrs">
         <div class="col-span-12 px-6 mt-12 space-y-4 text-center lg:col-span-6 xl:mt-10 sm:space-y-6 sm:text-left">
           <span data-aos="fade-right" data-aos-once="true" class="text-base font-semibold uppercase text-gradient"

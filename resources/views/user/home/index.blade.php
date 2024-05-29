@@ -1,5 +1,9 @@
 <x-user.layout.app>
 
+    <!-- banner -->
+    <x-user.layout.partials.banner />
+    <!-- end banner -->
+    
     <!-- partner -->
     <section class="relative max-w-full my-20 overflow-hidden shadow bg-partner sm:mx-6 sm:rounded-2xl">
       <div class="flex flex-col items-center justify-center w-full px-6 py-16 space-y-4 text-center sm:px-0">

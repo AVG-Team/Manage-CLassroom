@@ -78,6 +78,22 @@
 .max-h-0 {
     max-height: 0;
 }
+
+#toggle_nav:checked ~ div #hamburger #line {
+    @apply translate-y-1.5 rotate-45;
+}
+
+#toggle_nav:checked ~ div #hamburger #line2 {
+    @apply -rotate-45 -translate-y-1;
+}
+
+.toggled div:first-child {
+    @apply translate-y-1.5 rotate-45;
+}
+.toggled div:last-child {
+    @apply -rotate-45 -translate-y-1;
+}
+
 /* End header */
 
 .bg-partner {
