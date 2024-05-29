@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClassroomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,4 +15,4 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, "__invoke"])->name('home');
-
+Route::get('/hihi', [ClassroomController::class, "classroom"])->name('classroom');
