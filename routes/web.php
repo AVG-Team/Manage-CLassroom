@@ -15,4 +15,4 @@ use App\Http\Controllers\ClassroomController;
 */
 
 Route::get('/', [HomeController::class, "__invoke"])->name('home');
-Route::get('/hihi', [ClassroomController::class, "classroom"])->name('classroom');
+Route::get('/classroom', [ClassroomController::class, "classroom"])->name('classroom');
