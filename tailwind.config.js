@@ -1,6 +1,6 @@
-const { createThemes } = require('tw-colors');
+const { createThemes } = require("tw-colors");
 
-import colors from 'tailwindcss/colors';
+import colors from "tailwindcss/colors";
 
 module.exports = {
     content: [
@@ -26,12 +26,12 @@ module.exports = {
         },
         extend: {
             spacing: {
-                '18': '72px',
-                '16/12' : '4.12rem',
+                18: "72px",
+                "16/12": "4.12rem",
             },
             zIndex: {
-                '70': '70',
-                '60': '60',
+                70: "70",
+                60: "60",
             },
         },
     },
