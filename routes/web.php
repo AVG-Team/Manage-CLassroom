@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Middleware\CheckAnonymousController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group([
+    "middleware" => CheckAnonymousController::class,
+], function () {
+    Route::get("/login", [LoginController::class, "login"])->name("login");
 });

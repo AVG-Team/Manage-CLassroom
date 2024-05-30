@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "preline": "^2.3.0",
-        "tw-colors": "^3.3.1"
+        "tw-colors": "^3.3.1",
+        "tw-elements": "^2.0.0"
     }
 }
