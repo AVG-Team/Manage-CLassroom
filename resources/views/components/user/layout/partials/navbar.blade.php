@@ -3,7 +3,7 @@
             <div class="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
                 <div class="relative z-20 flex justify-between w-full md:px-0 lg:w-max">
                     <a href="/#home" aria-label="logo" class="flex items-center space-x-2">
-                        <img src="{{ asset('storage/img/logo/classroom.png') }}" class="w-[8rem] xl:w-[10rem]" alt="Classroom Logo" />
+                        <img src="{{ Vite::asset('resources/images/logo/classroom.png') }}" class="w-[8rem] xl:w-[10rem]" alt="Classroom Logo" />
                     </a>
                     <div class="relative flex max-h-10 lg:hidden">
                         <button aria-label="humburger" id="hamburger" class="relative p-6 -mr-6">
