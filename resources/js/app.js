@@ -14,6 +14,7 @@ AOS.init();
 //     });
 // });
 
+// navbar
 let isToggled = false;
 const navlinks = document.getElementById("navlinks");
 const hamburger = document.getElementById("hamburger");
@@ -52,3 +53,7 @@ links.forEach((link) => {
         toggleNavlinks();
     });
 });
+// end navbar
+
+// sidebar
+const sidebar = document.getElementsByClassName("subsidebar");
