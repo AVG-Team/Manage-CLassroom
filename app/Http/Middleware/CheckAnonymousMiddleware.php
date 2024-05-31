@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAnonymousController
+class CheckAnonymousMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class CheckAnonymousController
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check())
-            return redirect()->route("home")->withErrors("You are already logged in.");
+            return redirect()->route("home")->withErrors("Bạn đang đăng nhập");
 
         return $next($request);
     }

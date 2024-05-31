@@ -16,7 +16,7 @@ class CheckLoginMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(!auth()->check()) {
-            return redirect()->route('login')->withErrors('You must be logged in to access this page');
+            return redirect()->route('login')->withErrors('Bạn cần phải đăng nhập mới xem được trang này !');
         }
 
         return $next($request);
