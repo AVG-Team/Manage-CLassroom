@@ -32,12 +32,12 @@
                                 </a>
                             </li>
                             <li class="w-full lg:hidden">
-                                <x-user.form.buttons style="primary" class="w-full py-3 xl:px-8">
+                                <x-user.form.buttons.primary class="w-full py-3 xl:px-8" onclick="na()">
                                 Đăng nhập
-                                </x-user.form.buttons>
+                                </x-user.form.buttons.primary>
                             </li>
                             <li class="w-full lg:hidden">
-                                <x-user.form.buttons style="primary" class="w-full py-3 xl:px-8">
+                                <x-user.form.buttons class="w-full py-3 xl:px-8" onclick="location.href=''">
                                 Đăng ký
                                 </x-user.form.buttons>
                             </li>
@@ -46,12 +46,12 @@
 
                     <div class="mt-12 lg:mt-0">
                         <div class="hidden space-x-3 lg:flex">
-                            <x-user.form.buttons style="secondary"  class="px-6 py-3 xl:px-8">
+                            <x-user.form.buttons.secondary class="px-6 py-3 xl:px-8" onclick="window.open('{{ route('login') }}', '_blank')">
                             Đăng nhập
-                            </x-user.form.buttons>
-                            <x-user.form.buttons style="primary" class="px-6 py-3 xl:px-8">
+                            </x-user.form.buttons.secondary>
+                            <x-user.form.buttons.primary class="px-6 py-3 xl:px-8" onclick="window.open('{{ route('register') }}', '_blank')">
                             Đăng ký
-                            </x-user.form.buttons>
+                            </x-user.form.buttons.primary>
                         </div>
                     </div>
                 </div>

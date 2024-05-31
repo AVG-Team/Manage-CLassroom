@@ -9,7 +9,7 @@
             data-aos-once="true"
             class="text-[2.5rem] sm:text-5xl xl:text-6xl font-bold leading-tight capitalize sm:pr-8 xl:pr-10"
           >
-            Học Tập Cùng <span class="text-header-gradient"> Classroom MT </span> Hiệu Quả Và Kết Nối Dễ Dàng
+            Học Tập Cùng " <span class="text-header-gradient"> Quản Lý Lớp Học </span> " Hiệu Quả Và Kết Nối Dễ Dàng
           </h1>
           <p data-aos="fade-down" data-aos-once="true" data-aos-delay="300" class="hidden paragraph sm:block">
             Luyện tập thường xuyên, đặt câu hỏi và tìm hiểu sâu hơn để nắm vững kiến thức.
@@ -53,6 +53,7 @@
           class="absolute hidden w-6 sm:block bottom-56 right-24"
         />
         <img
+            style="left: 35rem; top: 1rem;"
             alt="Ellipse 4"
             data-aos="fade-up"
             data-aos-delay="300"

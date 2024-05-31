@@ -22,6 +22,7 @@ use App\Http\Controllers\ClassroomController;
 Route::get('/', [HomeController::class, "__invoke"])->name('home');
 Route::get('/classroom', [ClassroomController::class, "classroom"])->name('classroom');
 
+
 Route::group([
     "middleware" => CheckAnonymousMiddleware::class,
 ], function () {
