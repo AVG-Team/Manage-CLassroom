@@ -3,7 +3,7 @@
             <div class="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
                 <div class="relative z-20 flex justify-between w-full md:px-0 lg:w-max">
                     <a href="/#home" aria-label="logo" class="flex items-center space-x-2">
-                        <img src="{{ asset('storage/img/logo/classroom.png') }}" class="w-[8rem] xl:w-[10rem]" alt="Classroom Logo" />
+                        <img src="{{ Vite::asset('resources/images/logo/classroom.png') }}" class="w-[8rem] xl:w-[10rem]" alt="Classroom Logo" />
                     </a>
                     <div class="relative flex max-h-10 lg:hidden">
                         <button aria-label="humburger" id="hamburger" class="relative p-6 -mr-6">
@@ -32,12 +32,12 @@
                                 </a>
                             </li>
                             <li class="w-full lg:hidden">
-                                <x-user.form.buttons style="primary" class="w-full py-3 xl:px-8">
+                                <x-user.form.buttons.primary class="w-full py-3 xl:px-8" onclick="na()">
                                 Đăng nhập
-                                </x-user.form.buttons>
+                                </x-user.form.buttons.primary>
                             </li>
                             <li class="w-full lg:hidden">
-                                <x-user.form.buttons style="primary" class="w-full py-3 xl:px-8">
+                                <x-user.form.buttons class="w-full py-3 xl:px-8" onclick="location.href=''">
                                 Đăng ký
                                 </x-user.form.buttons>
                             </li>
@@ -46,12 +46,12 @@
 
                     <div class="mt-12 lg:mt-0">
                         <div class="hidden space-x-3 lg:flex">
-                            <x-user.form.buttons style="secondary"  class="px-6 py-3 xl:px-8">
+                            <x-user.form.buttons.secondary class="px-6 py-3 xl:px-8" onclick="window.open('{{ route('login') }}', '_blank')">
                             Đăng nhập
-                            </x-user.form.buttons>
-                            <x-user.form.buttons style="primary" class="px-6 py-3 xl:px-8">
+                            </x-user.form.buttons.secondary>
+                            <x-user.form.buttons.primary class="px-6 py-3 xl:px-8" onclick="window.open('{{ route('register') }}', '_blank')">
                             Đăng ký
-                            </x-user.form.buttons>
+                            </x-user.form.buttons.primary>
                         </div>
                     </div>
                 </div>

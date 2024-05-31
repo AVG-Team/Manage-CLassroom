@@ -1,9 +1,9 @@
 <x-user.layout.app>
-
+    @section('title', 'Trang Chủ - ' . config('app.name'))
     <!-- banner -->
     <x-user.layout.partials.banner />
     <!-- end banner -->
-    
+
     <!-- partner -->
     <section class="relative max-w-full my-20 overflow-hidden shadow bg-partner sm:mx-6 sm:rounded-2xl">
       <div class="flex flex-col items-center justify-center w-full px-6 py-16 space-y-4 text-center sm:px-0">
@@ -27,9 +27,9 @@
         </div>
         <div class="col-span-12 px-4 mt-20 space-y-6 lg:col-span-5 sm:px-6">
             <h2 class="text-4xl font-semibold">
-                Về chúng tôi <span class="text-header-gradient">Classroom</span>
+                Về chúng tôi "<span class="text-header-gradient">Quản Lý Lớp Học</span>"
             </h2>
-            <p class="paragraph">Những nét nổi bật của website classroom chúng tôi</p>
+            <p class="paragraph">Những nét nổi bật của website của chúng tôi</p>
             <ul class="space-y-4 sm:space-y-2">
                 <li class="space-y-2">
                     <div class="flex items-center space-x-2">

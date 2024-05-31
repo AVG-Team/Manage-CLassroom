@@ -97,7 +97,7 @@
 /* End header */
 
 .bg-partner {
-    background: url("../../storage/app/public/img/partner/background.png");
+    background: url("../../resources/images/partner/background.png");
     background-size: cover;
     background-position: center;
 }
