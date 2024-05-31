@@ -1,7 +1,7 @@
 const { createThemes } = require("tw-colors");
 
 import colors from "tailwindcss/colors";
-
+import screens from "tailwindcss/screens";
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
@@ -22,6 +22,22 @@ module.exports = {
             alert: colors.yellow,
             error: colors.red,
             blueGray: colors.slate,
+        },
+        screens: {
+            sm: "640px",
+            // => @media (min-width: 640px) { ... }
+
+            md: "768px",
+            // => @media (min-width: 768px) { ... }
+
+            lg: "1024px",
+            // => @media (min-width: 1024px) { ... }
+
+            xl: "1280px",
+            // => @media (min-width: 1280px) { ... }
+
+            xxl: "1900px",
+            // => @media (min-width: 1536px) { ... }
         },
         extend: {
             spacing: {
