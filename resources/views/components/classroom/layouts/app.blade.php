@@ -11,23 +11,23 @@
 <body>
     <div class="relative min-h-screen font-sans antialiased">
     <div class="relative">
-      <div
-        class="absolute top-0 left-0 w-full h-[125vh] sm:h-[225vh] lg:h-[100vh] bg-custom sm:bg-custom"
-      ></div>
+      <!-- <div
+        class="absolute top-0 left-0 w-full h-[125vh] sm:h-[225vh] lg:h-[100vh] bg-[#A0DEFF] sm:bg-[#A0DEFF]"
+      ></div> -->
         <!-- Header -->
-        <x-user.layout.partials.header />
+        <x-classroom.layouts.partials.header />
         <!-- End Header -->
 
       
         <!-- Content -->
-        <main class="text-neutral-800">
+        <main class="pt-5">
             {{ $slot }}
         </main>
         <!-- End Content  -->
     
 
         <!-- Footer -->
-        <x-user.layout.partials.footer />
+        <x-classroom.layouts.partials.footer />
         <!-- End Footer -->
     </div>
   </div>

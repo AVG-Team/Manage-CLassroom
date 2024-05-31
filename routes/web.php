@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckAnonymousMiddleware;
 use App\Http\Middleware\CheckLoginMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClassroomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, "__invoke"])->name('home');
-
+Route::get('/classroom', [ClassroomController::class, "classroom"])->name('classroom');
 
 Route::group([
     "middleware" => CheckAnonymousMiddleware::class,
