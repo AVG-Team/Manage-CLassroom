@@ -4,7 +4,8 @@ import {
     initTWE,
 } from "tw-elements";
 
-import "preline"
+import "preline";
+import './toast.js';
 
 initTWE({ Input, Ripple });
 

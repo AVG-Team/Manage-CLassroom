@@ -40,5 +40,6 @@ Route::group([
 ], function () {
     Route::get("/logout", [LogoutController::class, "__invoke"])->name("logout");
     Route::get("profile", [ProfileController::class, "index"])->name("profile");
+    Route::post("profile", [ProfileController::class, "process"])->name("profile.process");
 });
 Route::get('/classroom', [ClassroomController::class, "classroom"])->name('classroom');

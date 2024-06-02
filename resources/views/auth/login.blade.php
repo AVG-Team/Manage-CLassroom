@@ -131,12 +131,13 @@
                 document.addEventListener("DOMContentLoaded", function () {
                     const inputPassword = document.getElementById("inputPassword");
                     const eye = document.getElementById("eye_show_pwd");
+                    const eyeHidden = document.getElementById("eye_hidden_pwd");
 
                     inputPassword.addEventListener("focus", function () {
-                        eye.classList.remove("hidden");
+                        if(eyeHidden.classList.contains("hidden"))
+                            eye.classList.remove("hidden");
                     });
 
-                    const eyeHidden = document.getElementById("eye_hidden_pwd");
                     eye.addEventListener("click", function () {
                         eye.classList.add("hidden");
                         eyeHidden.classList.remove("hidden");

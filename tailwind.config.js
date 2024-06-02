@@ -8,7 +8,8 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "node_modules/preline/dist/*.js",
-        "node_modules/tw-elements/js/**/*.js"
+        "node_modules/tw-elements/js/**/*.js",
+        "node_modules/flowbite-datepicker/js/**/*.js"
     ],
     theme: {
         colors: {
@@ -66,4 +67,5 @@ module.exports = {
     plugins: [
         require('preline/plugin'),
     ],
+    darkMode: 'false',
 }
