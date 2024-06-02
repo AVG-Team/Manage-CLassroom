@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PasswordResetTokenStatus;
 use App\Enums\UserLevelEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

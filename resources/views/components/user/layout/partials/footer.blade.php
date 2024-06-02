@@ -6,7 +6,6 @@
         >
           <div class="mb-6 sm:hidden xl:block sm:mb-0">
             <a href="#">
-
               <img src="{{ Vite::asset('resources/images/logo/classroom.png') }}" class="-mt-2" alt="Classroom Logo" />
             </a>
           </div>
