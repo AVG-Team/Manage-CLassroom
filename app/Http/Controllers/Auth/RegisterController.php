@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Events\UserRegisterEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Models\PasswordResetToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -29,9 +31,17 @@ class RegisterController extends Controller
                 'role' => 0,
             ]);
 
-            Auth::login($user, true);
+            $token = Str::random(5) . "-". Str::uuid() . "-" . time();
 
-            UserRegisterEvent::dispatch($user);
+            PasswordResetToken::query()->create([
+                'email' => $user->email,
+                'token' => $token,
+                'created_at' => now(),
+                'status' => 0,
+                'type' => 1,
+            ]);
+
+            UserRegisterEvent::dispatch($user, $token);
 
             DB::commit();
 

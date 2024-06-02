@@ -52,7 +52,7 @@
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #4caf50;
+            background-color: #5AB2FF;
             color: #ffffff;
             font-size: 16px;
             font-weight: bold;
@@ -64,7 +64,7 @@
         }
 
         .btn:hover {
-            background-color: #3e8e41;
+            background-color: #3e7cb2;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
         }
@@ -84,8 +84,8 @@
     <br>
     <br>
     <br>
-    <p>Cảm Ơn,</p>
-    <p>{{ config('app.name') }}</p>
+    <p style="font-weight: bold">Cảm Ơn,</p>
+    <p style="font-weight: bold">{{ config('app.name') }}</p>
 </div>
 </body>
 </html>

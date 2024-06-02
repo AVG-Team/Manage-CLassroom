@@ -118,7 +118,7 @@
                     <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
                         Bạn chưa có tài khoản ?
                         <a
-                            href="#"
+                            href="{{ route("register") }}"
                             class="text-secondary transition duration-150 ease-in-out hover:text-secondary-700 focus:text-secondary-700 active:text-secondary-800"
                         >Đăng kí ngay !!!</a>
                     </p>

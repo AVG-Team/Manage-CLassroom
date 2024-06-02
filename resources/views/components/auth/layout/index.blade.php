@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', config("app.name"))</title>
-    @vite('resources/css/app.css')
+    @vite('resources/css/auth.css')
     @stack('styles')
     <style>
         .group[data-twe-input-focused] .group-data-\[twe-input-focused\]\:border-primary {
@@ -27,7 +27,6 @@
     </section>
 </div>
 @vite('resources/js/auth.js')
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 @stack('scripts')
 </body>
 </html>

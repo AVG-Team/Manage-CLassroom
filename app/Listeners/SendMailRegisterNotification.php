@@ -23,7 +23,9 @@ class SendMailRegisterNotification implements ShouldQueue
     public function handle(UserRegisterEvent $event): void
     {
         $user = $event->user;
-        Mail::send('email.register', compact('user'), function ($email) use ($user) {
+        $token = $event->token;
+
+        Mail::send('email.register', compact('user', 'token'), function ($email) use ($user) {
             $email->subject('Manage Events - Create Account Successfully');
             $email->to($user->email, $user->name);
         });
