@@ -26,9 +26,7 @@
         <!-- End Content  -->
     
 
-        <!-- Footer -->
-        <x-classroom.layouts.partials.footer />
-        <!-- End Footer -->
+      
     </div>
   </div>
     @vite('resources/js/app.js')

@@ -20,6 +20,7 @@ AOS.init();
 // navbar
 let isToggled = false;
 const navlinks = document.getElementById("navlinks");
+const sidebarLinks = document.getElementById("sidebarLinks");
 const hamburger = document.getElementById("hamburger");
 const layer = document.getElementById("navLayer");
 const links = [...navlinks.querySelector("ul").children];
@@ -41,6 +42,7 @@ function toggleNavlinks() {
             "!opacity-100",
             "!lg:translate-y-0"
         );
+
         hamburger.classList.remove("toggled");
         layer.classList.remove("origin-top", "scale-y-100");
     }
@@ -59,4 +61,24 @@ links.forEach((link) => {
 // end navbar
 
 // sidebar
-const sidebar = document.getElementsByClassName("subsidebar");
+const sidebar = document.getElementById("subSidebar");
+const subItem = document.getElementById("subItem");
+const iconOpen = document.getElementById("iconOpen");
+const iconClose = document.getElementById("iconClose");
+
+function toggleSidebar() {
+    if (isToggled) {
+        subItem.classList.add("hidden");
+        iconClose.classList.add("hidden");
+        iconOpen.classList.remove("hidden");
+    } else {
+        subItem.classList.remove("hidden");
+        iconClose.classList.remove("hidden");
+        iconOpen.classList.add("hidden");
+    }
+}
+
+sidebar.addEventListener("click", () => {
+    isToggled = !isToggled;
+    toggleSidebar();
+});
