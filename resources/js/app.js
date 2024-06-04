@@ -1,6 +1,9 @@
 import "./bootstrap";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "@lottiefiles/lottie-player";
+import "./toast"
+import "preline"
 
 AOS.init();
 // document.addEventListener("DOMContentLoaded", function () {

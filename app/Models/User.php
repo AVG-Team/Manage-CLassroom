@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\UserLevelEnum;
+use App\Enums\PasswordResetTokenStatus;
 use Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
@@ -39,6 +39,7 @@ class User extends Authenticatable
     ];
 
     public $timestamps = true;
+    protected $primaryKey = 'uuid';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,13 +59,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'uuid' => 'string'
     ];
 
     protected function keyLevel(): Attribute
     {
         return Attribute::get(function () {
             $value = $this->level ?? 0;
-            return UserLevelEnum::getKeyByValue($value);
+            return PasswordResetTokenStatus::getKeyByValue($value);
         });
     }
 

@@ -8,7 +8,7 @@
                         </svg>
                     </button>
                     <a href="/#home" aria-label="logo" class="flex items-center space-x-2 text-xl font-bold text-primary">
-                        <img src="{{ asset('storage/img/logo/classroom.png') }}" class="w-[8rem]  xl:w-[10rem]" alt="Classroom Logo" />
+                        <img src="{{ Vite::asset('resources/images/logo.png') }}" class="w-[8rem]  xl:w-[10rem]" alt="Classroom Logo" />
                     </a>
                     <div class="relative flex max-h-10 lg:hidden">
                         <button aria-label="humburger" id="hamburger" class="relative p-6 -mr-6">
@@ -28,6 +28,7 @@
                                     </svg>
                                 </button>
                             </li>
+
                             <li class="relative w-full">
                                 <button class="relative flex items-center justify-center w-10 h-10 px-2 space-x-2 transition duration-300 border-2 rounded-full hover:shadow-md hover:shadow-gray-600/50 bg-primary">
                                     <div class="absolute inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">

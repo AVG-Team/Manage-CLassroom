@@ -38,4 +38,3 @@
         <!-- End Footer -->
     </div>
 </x-classroom.layouts.app>
-

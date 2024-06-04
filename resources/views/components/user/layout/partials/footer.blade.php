@@ -6,7 +6,7 @@
         >
           <div class="mb-6 sm:hidden xl:block sm:mb-0">
             <a href="#">
-              <img src="{{ asset('storage/img/logo/classroom.png') }}" class="-mt-2" alt="Classroom Logo" />
+              <img src="{{ Vite::asset('resources/images/logo/classroom.png') }}" class="-mt-2" alt="Classroom Logo" />
             </a>
           </div>
         </div>
@@ -27,7 +27,7 @@
                     class="md:px-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline"
                     href="#"
                     >
-                     Liên hệ 
+                     Liên hệ
                     </a>
                 </li>
                 <li class="w-full">
@@ -65,6 +65,11 @@
       </div>
     </div>
     <div class="py-8 sm:py-4 text-center text-sm text-[#666666] hover:text-gray-900">
-      &copy; Copyright 2023. All rights reserved
+      &copy; Copyright <span id="getYearToday"></span>. All rights reserved
     </div>
   </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('getYearToday').innerHTML = new Date().getFullYear();
+    });
+</script>
