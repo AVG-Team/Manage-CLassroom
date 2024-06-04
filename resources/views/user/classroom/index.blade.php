@@ -33,5 +33,9 @@
                 
             </div>
         </div>
+        <!-- Footer -->
+        <x-classroom.layouts.partials.footer />
+        <!-- End Footer -->
     </div>
 </x-classroom.layouts.app>
+
