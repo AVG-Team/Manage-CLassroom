@@ -17,20 +17,22 @@
                         </button>
                     </div>
                 </div>
-                <div id="navLayer" aria-hidden="true" class="fixed inset-0 z-10 w-screen h-screen transition duration-500 origin-bottom scale-y-0 bg-white/70 backdrop-blur-2xl  lg:hidden"></div>
+                <div id="navLayer" aria-hidden="true" class="fixed inset-0 z-10 w-screen h-screen transition duration-500 origin-bottom scale-y-0 bg-white/70 backdrop-blur-2xl lg:hidden"></div>
                 <div id="navlinks" class="absolute left-0 z-20 flex-col flex-wrap justify-end invisible w-full gap-6 p-8 transition-all duration-300 origin-top-right scale-90 translate-y-1 bg-white border border-gray-100 shadow-2xl opacity-0 top-full rounded-3xl shadow-gray-600/10 lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none">
                     <div class="w-full text-gray-600 lg:w-auto lg:pr-4 lg:pt-0">
-                        <ul class="flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
-                            <li class="w-full">
+                        <ul class="flex flex-col items-center gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
+                            <li class="w-full mr-2">
                                 <button class="flex items-center px-2 space-x-2 transition duration-300 rounded-full hover:shadow-md hover:shadow-gray-600/50">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg>
                                 </button>
                             </li>
-                            <li class="w-full">
-                                <button class="flex items-center px-2 space-x-2 transition duration-300 border-2 rounded-full hover:shadow-md hover:shadow-gray-600/50">
-                                    <img src="{{ asset('storage/img/logo/classroom.png') }}" class="w-2 xl:w-[3rem]" alt="Classroom Logo" />
+                            <li class="relative w-full">
+                                <button class="relative flex items-center justify-center w-10 h-10 px-2 space-x-2 transition duration-300 border-2 rounded-full hover:shadow-md hover:shadow-gray-600/50 bg-primary">
+                                    <div class="absolute inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
+                                        N
+                                    </div>
                                 </button>
                             </li>
                         </ul>
