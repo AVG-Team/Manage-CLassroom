@@ -2,8 +2,8 @@ import "./bootstrap";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "@lottiefiles/lottie-player";
-import "./toast"
-import "preline"
+import "./toast";
+import "preline";
 
 AOS.init();
 // document.addEventListener("DOMContentLoaded", function () {
@@ -59,26 +59,3 @@ links.forEach((link) => {
     });
 });
 // end navbar
-
-// sidebar
-const sidebar = document.getElementById("subSidebar");
-const subItem = document.getElementById("subItem");
-const iconOpen = document.getElementById("iconOpen");
-const iconClose = document.getElementById("iconClose");
-
-function toggleSidebar() {
-    if (isToggled) {
-        subItem.classList.add("hidden");
-        iconClose.classList.add("hidden");
-        iconOpen.classList.remove("hidden");
-    } else {
-        subItem.classList.remove("hidden");
-        iconClose.classList.remove("hidden");
-        iconOpen.classList.add("hidden");
-    }
-}
-
-sidebar.addEventListener("click", () => {
-    isToggled = !isToggled;
-    toggleSidebar();
-});

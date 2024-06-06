@@ -41,4 +41,6 @@ Route::group([
     Route::get("/logout", [LogoutController::class, "__invoke"])->name("logout");
     Route::get("profile", [ProfileController::class, "index"])->name("profile");
 });
-Route::get('/classroom', [ClassroomController::class, "classroom"])->name('classroom');
+Route::get('/classroom', [ClassroomController::class, "index"])->name('classroom');
+Route::get('/classroom/participate', [ClassroomController::class, "participate"])->name('participate');
+Route::get('/classroom/detail/{classroom}', [ClassroomController::class, "detail"])->name('classroom.detail');
