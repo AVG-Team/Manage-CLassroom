@@ -11,9 +11,6 @@
 <body>
     <div class="relative min-h-screen font-sans antialiased">
     <div class="relative">
-      <!-- <div
-        class="absolute top-0 left-0 w-full h-[125vh] sm:h-[225vh] lg:h-[100vh] bg-[#A0DEFF] sm:bg-[#A0DEFF]"
-      ></div> -->
         <!-- Header -->
         <x-classroom.layouts.partials.header />
         <!-- End Header -->
@@ -29,7 +26,6 @@
       
     </div>
   </div>
-    @vite('resources/js/app.js')
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    @vite('resources/js/classroom.js')
 </body>
 </html>

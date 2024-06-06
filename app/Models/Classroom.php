@@ -29,4 +29,11 @@ class Classroom extends Model
             ->withPivot('status')
             ->withTimestamps();
     }
+
+    public function teachers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'classroom_details', 'classroom_id', 'user_id')
+            ->where('role', 2)
+            ->withTimestamps();
+    }
 }
