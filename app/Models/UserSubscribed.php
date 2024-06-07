@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class UserSubscribed extends Model
 {
-    use HasFactory, softDeletes;
-
-    protected $table = 'classroom_categories';
+    protected $table = 'user_subscribed';
+    use HasFactory;
 
     protected $fillable = [
-        'name',
+        'status',
+        'classroom_id',
+        'user_id',
     ];
 
     public $timestamps = true;

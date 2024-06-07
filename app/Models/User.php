@@ -104,8 +104,13 @@ class User extends Authenticatable
 
     public function classrooms(): BelongsToMany
     {
-        return $this->belongsToMany(Classroom::class, 'classroom_details', 'user_id', 'classroom_id')
+        return $this->belongsToMany(Classroom::class, 'user_subscribed', 'user_id', 'classroom_id')
             ->withPivot('status')
             ->withTimestamps();
+    }
+
+    public function teacherClassrooms(): HasMany
+    {
+        return $this->hasMany(Classroom::class, 'teacher_id', 'uuid');
     }
 }
