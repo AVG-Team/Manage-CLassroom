@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckAnonymousMiddleware;
 use App\Http\Middleware\CheckLoginMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExerciseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,5 @@ Route::group([
 Route::get('/classroom', [ClassroomController::class, "index"])->name('classroom');
 Route::get('/classroom/participate', [ClassroomController::class, "participate"])->name('participate');
 Route::get('/classroom/detail/{classroom}', [ClassroomController::class, "detail"])->name('classroom.detail');
+
+Route::get('/classroom/ex/{exercise}', [ExerciseController::class, "index"])->name('exercise');

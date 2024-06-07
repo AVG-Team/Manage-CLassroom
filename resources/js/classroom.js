@@ -43,26 +43,25 @@ links.forEach((link) => {
 });
 // end navbar
 
-const sidebar = document.getElementById("subSidebar");
-const subItem = document.getElementById("subItem");
-const iconOpen = document.getElementById("iconOpen");
-const iconClose = document.getElementById("iconClose");
+const sidebars = document.getElementsByClassName("subSidebar");
+const subItems = document.getElementsByClassName("subItem");
+const iconOpens = document.getElementsByClassName("iconOpen");
+const iconCloses = document.getElementsByClassName("iconClose");
 
-function toggleSidebar() {
-    if (isToggled) {
-        subItem.classList.add("hidden");
-        iconClose.classList.add("hidden");
-        iconOpen.classList.remove("hidden");
-    } else {
-        subItem.classList.remove("hidden");
-        iconClose.classList.remove("hidden");
-        iconOpen.classList.add("hidden");
-    }
-}
 
-sidebar.addEventListener("click", () => {
-    isToggled = !isToggled;
-    toggleSidebar();
+Array.from(sidebars).forEach((sidebar, index) => {
+    sidebar.addEventListener("click", () => {
+       isToggled = !isToggled;
+        if (isToggled) {
+            subItems[index].classList.add("hidden");
+            iconCloses[index].classList.add("hidden");
+            iconOpens[index].classList.remove("hidden");
+        } else {
+            subItems[index].classList.remove("hidden");
+            iconCloses[index].classList.remove("hidden");
+            iconOpens[index].classList.add("hidden");
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -140,4 +139,29 @@ Array.from(exerciseBtns).forEach((exerciseBtn, index) => {
         }
     });
 });
+
+// Modal
+document.addEventListener("DOMContentLoaded", () => {
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtns = document.querySelectorAll("#closeModalBtn, #closeModalBtnBottom");
+    const modal = document.getElementById("myModal");
+
+    openModalBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+    });
+
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+    });
+
+    // Close the modal when clicking outside the modal content
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+});
+
 

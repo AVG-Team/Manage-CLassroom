@@ -77,7 +77,7 @@ class User extends Authenticatable
 
     public function exercises(): HasMany
     {
-        return $this->hasMany(Execrise::class);
+        return $this->hasMany(Execrise::class,'user_id');
     }
 
     public function orders(): HasMany
@@ -96,4 +96,6 @@ class User extends Authenticatable
             ->withPivot('status')
             ->withTimestamps();
     }
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Classroom;
+use App\Models\Execrise;
 use App\Http\Requests\StoreClassroomRequest;
 
 
@@ -35,7 +36,7 @@ class ClassroomController extends Controller
         $title = "Detail Classroom";
         $classroom = Classroom::findOrFail($id);
         $user = auth()->user();
-        return view('user.classroom.detail', ['title' => $title], compact('classroom', 'user'));
+        return view('user.classroom.detailClassroom', ['title' => $title], compact('classroom', 'user'));
     }
 
     // public function store(StoreClassroomRequest $request){

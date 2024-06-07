@@ -1,3 +1,4 @@
+@props(['title','description','created_at','id'])
 <div class="h-auto mb-2 border rounded-xl">
     <div class="exerciseBtn flex items-center w-full p-4 bg-white shadow-md rounded-xl hover:bg-gray-100 border-b">
         <div class="flex-shrink-0">
@@ -8,7 +9,7 @@
             </div>
         </div>
         <div class="items-start flex-1 ml-4">
-            <p class="text-sm text-gray-700">Ngày 4/6</p>
+            <p class="text-sm text-gray-700">Ngày {{ $created_at }} </p>
         </div>
         <div class="items-end ml-4">
             <p class="text-xs text-gray-400">Đến hạn 21:30 4/6</p>
@@ -16,9 +17,9 @@
     </div>
     <div class=" description items-center w-full p-4 bg-white shadow-md rounded-b-xl hidden">
         <div class="items-start flex-1  border-b mb-3 p-2">
-            <p class="text-sm text-gray-700">Ngày 4/6</p>
-            <p class="text-sm text-gray-700">Bài tập về nhà</p>
+            <p class="text-sm text-gray-700">{{ $title }}</p>
+            <p class="text-sm text-gray-700">{{ $description }}</p>
         </div>
-        <a href="#" class="text-blue-600 no-underline font-medium text-md p-2 hover:bg-blue-100 rounded-xl">Xem hưỡng dẫn  </a>
+        <a href="{{ route('exercise', $id) }}" class="text-blue-600 no-underline font-medium text-md p-2 hover:bg-blue-100 rounded-xl">Xem hưỡng dẫn  </a>
     </div>
 </div>

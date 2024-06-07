@@ -51,9 +51,12 @@
                      aria-labelledby="exercise-tab">
                     <div class="xl:container xl:px-4 mx-auto">
                         <div class="flex flex-col">
-                            @for($i = 0 ; $i < 5 ; $i++)
-                                <x-classroom.layouts.items.exercise/>
-                            @endfor
+                            @foreach($user->exercises as $exercise)
+                                <x-classroom.layouts.items.exercise  :id="$exercise->id"
+                                                                     :title="$exercise->title"
+                                                                     :description="$exercise->description"
+                                                                     :created_at="$exercise->created_at"/>
+                            @endforeach
                         </div>
                     </div>
                 </div>

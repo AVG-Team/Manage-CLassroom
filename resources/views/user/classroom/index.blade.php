@@ -1,4 +1,4 @@
-<x-classroom.layouts.app>
+<x-classroom.layouts.app :user="$user">
     <div class="p-4 sm:ml-56 lg:ml-80">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-14">
             <div class="grid items-center justify-center grid-cols-1 mb-4 xl:gap-4 xl:grid-cols-3">
@@ -53,7 +53,7 @@
                 @endif
             </div>
         </div>
-        <div id="default-modal" tabindex="-1" aria-hidden="true"
+        <div id="myModal"
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full p-4">
                 <!-- Modal content -->
@@ -65,7 +65,7 @@
                         </h3>
                         <button type="button"
                                 class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-hide="default-modal">
+                                id="closeModalBtn">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                  viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -94,7 +94,7 @@
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             I accept
                         </button>
-                        <button data-modal-hide="default-modal" type="button"
+                        <button id="closeModalBtnBottom" type="button"
                                 class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                             Decline
                         </button>
