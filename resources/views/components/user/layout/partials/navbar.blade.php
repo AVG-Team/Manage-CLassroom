@@ -90,6 +90,12 @@
                                        href="{{ route("classroom") }}">
                                         Vào Lớp Học
                                     </a>
+                                    @if(auth()->check())
+                                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                               href="{{ route("logout") }}">
+                                                Đăng Xuất
+                                            </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -46,11 +46,11 @@ class RegisterController extends Controller
             DB::commit();
 
             return redirect()->route('home')
-                ->with('success', 'Create new user successfully!');
+                ->with('success', 'Tạo Người Dùng Thành Công !!!');
         } catch (\Exception $e) {
             DB::rollBack();
 
-            dd($e->getMessage());
+            return back()->withErrors(['error' => 'Tạo Người Dùng Thất Bại !!!']);
         }
     }
 }
