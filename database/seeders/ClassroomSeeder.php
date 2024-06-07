@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\Classroom;
-use App\Models\Category;
+use App\Models\Subject;
 
 class ClassroomSeeder extends Seeder
 {
@@ -17,7 +17,7 @@ class ClassroomSeeder extends Seeder
     {
         $arr = [];
         $faker = \Faker\Factory::create('vi_VN');
-        $categoryIds = Category::pluck('id')->toArray();
+        $categoryIds = Subject::pluck('id')->toArray();
         for ($i = 1; $i <= 10; $i++) {
             $arr[] = [
                 'title' => $faker->randomElement(["Toán","Văn","Anh"]),

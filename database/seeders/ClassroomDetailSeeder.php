@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Classroom;
-use App\Models\ClassroomDetail;
+use App\Models\UserSubscribed;
 use App\Models\User;
 
 
@@ -28,6 +28,6 @@ class ClassroomDetailSeeder extends Seeder
                 'status' => $faker->randomElement([0, 1]),
             ];
         }
-        ClassroomDetail::insert($arr);
+        UserSubscribed::insert($arr);
     }
 }
