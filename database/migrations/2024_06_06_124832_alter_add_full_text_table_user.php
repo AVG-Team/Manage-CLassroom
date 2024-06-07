@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (Schema::hasTable('users')) {
             Schema::table('users', function (Blueprint $table) {
-                DB::statement('ALTER TABLE users ADD FULLTEXT `name` (`name`)'); //đánh index cho cột name
+//                DB::statement('ALTER TABLE users ADD FULLTEXT `name` (`name`)'); //đánh index cho cột name
             });
         }
     }
