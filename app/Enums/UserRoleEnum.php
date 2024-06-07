@@ -10,20 +10,29 @@ use BenSampo\Enum\Enum;
  * @method static static STAFF()
  * @method static static ADMIN()
  */
-final class UserLevelEnum extends Enum
+final class UserRoleEnum extends Enum
 {
     public const USER = 0;
     public const TEACHER = 1;
-    public const STAFF = 1;
-    public const ADMIN = 2;
+    public const STAFF = 2;
+    public const ADMIN = 3;
 
     public static function getArrayView(): array
     {
         return [
-            'User' => self::USER,
-            'Teacher' => self::TEACHER,
-            'Staff' => self::STAFF,
-            'Admin' => self::ADMIN,
+            'Học Sinh' => self::USER,
+            'Giáo Viên' => self::TEACHER,
+            'Nhân Viên' => self::STAFF,
+            'Quản Trị' => self::ADMIN,
+        ];
+    }
+
+    public static function getArrayViewForStaff(): array
+    {
+        return [
+            'Học Sinh' => self::USER,
+            'Giáo Viên' => self::TEACHER,
+            'Nhân Viên' => self::STAFF,
         ];
     }
 

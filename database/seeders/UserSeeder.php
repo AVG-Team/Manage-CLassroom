@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\PasswordResetTokenStatus;
-use App\Enums\UserLevelEnum;
+use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $arr = [];
         $faker = \Faker\Factory::create('vi_VN');
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             $arr[] = [
                 'name' => $faker->name(),
                 'email' => $faker->email(),
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'address' => $faker->address(),
                 'birthday' => $faker->date(),
                 'gender' => $faker->randomElement([true, false]),
-                'role' => $faker->randomElement(UserLevelEnum::getValues()),
+                'role' => $faker->randomElement(UserRoleEnum::getValues()),
                 'password' => Hash::make('12345678'),
                 'remember_token' => null,
             ];

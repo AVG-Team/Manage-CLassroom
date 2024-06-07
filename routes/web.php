@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckAnonymousMiddleware;
@@ -33,6 +34,7 @@ Route::group([
     Route::get("/register", [RegisterController::class, "index"])->name("register");
     Route::post("/register", [RegisterController::class, "register"])->name("register.process");
     Route::get("/email/verify", [EmailVerifiedController::class, "__invoke"])->name("email.verified");
+    Route::get("forgot-password", [ForgotPasswordController::class, "index"])->name("forgot-password");
 });
 
 Route::group([
