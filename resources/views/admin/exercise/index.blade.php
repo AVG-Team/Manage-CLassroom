@@ -9,7 +9,7 @@
     @section('title', $title)
     @section('title-content', $contentTitle)
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('admin.users') }}
+        {{ Breadcrumbs::render('admin.exercises') }}
     @endsection
     <div class="mb-3">
         <div>
@@ -22,48 +22,31 @@
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
-                <div style="direction: rtl">
-                    <x-user.form.buttons.primary href="#" class="px-3 py-3 flex !rounded" onclick="location.href='{{ route('admin.users.create') }}'">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/>
-                        </svg>
-                    </x-user.form.buttons.primary>
-                </div>
             </div>
         </div>
-        <div class="grid sm:grid-cols-4 gap-4">
-            <label for="filter_all"
+        <p class="mb-3 text-lg font-medium text-black">Tìm Kiếm Theo : </p>
+        <div class="grid sm:grid-cols-3 gap-4">
+            <label for="filter_name_file"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-                <input type="radio" name="filter_type" id="filter_all" value="-1" {{ request('filter_type', -1) == -1 ? 'checked' : '' }}
+                <input type="radio" name="search_type" id="filter_name_file" value="0" {{ request('search_type', 0) == 0 ? 'checked' : '' }}
                 class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                 >
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tất Cả Người Dùng</span>
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tên File</span>
             </label>
-            <label for="filter_student"
+            <label for="filter_name_user"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-                <input type="radio" name="filter_type" value="0" {{ request('filter_type', -1) == 0 ? 'checked' : '' }}
-                       class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                       id="filter_student">
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Học Sinh</span>
+                <input type="radio" name="search_type" value="1" {{ request('search_type', 0) == 1 ? 'checked' : '' }}
+                class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                       id="filter_name_user">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tên Người Dùng</span>
             </label>
-            <label for="filter_teacher"
+            <label for="filter_title_classroom"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-                <input type="radio" name="filter_type" value="1" {{ request('filter_type', -1) == 1 ? 'checked' : '' }}
-                       class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                       id="filter_teacher">
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Giáo Viên</span>
+                <input type="radio" name="search_type" value="2" {{ request('search_type', 0) == 2 ? 'checked' : '' }}
+                class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                       id="filter_title_classroom">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tiêu Đề Lớp Học</span>
             </label>
-            @if(auth()->user()->role == \App\Enums\UserRoleEnum::ADMIN)
-                <label for="filter_admin"
-                       class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-                    <input type="radio" name="filter_type" value="2" {{ request('filter_type', -1) == 2 ? 'checked' : '' }}
-                           class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                           id="filter_admin">
-                    <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Nhân Viên Và Admin</span>
-                </label>
-            @endif
         </div>
     </div>
     <div class="flex flex-col">
@@ -98,10 +81,10 @@
         <script>
             function fetchData() {
                 console.log(document.getElementById('search').value)
-                axios.get('{{ route('admin.users.table') }}', {
+                axios.get('{{ route('admin.exercises.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
-                        filter_type: document.querySelector('input[name="filter_type"]:checked').value,
+                        search_type: document.querySelector('input[name="search_type"]:checked').value,
                         search: document.getElementById('search').value
                     }
                 })
@@ -115,7 +98,7 @@
                 fetchData();
             });
 
-            document.getElementsByName('filter_type').forEach(function (element) {
+            document.getElementsByName('search_type').forEach(function (element) {
                 element.addEventListener('change', function (e) {
                     fetchData();
                 });

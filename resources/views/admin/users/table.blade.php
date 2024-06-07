@@ -25,7 +25,7 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
         @foreach($users as $user)
-            <tr>
+            <tr onclick="location.href='{{ route('admin.users.edit', $user->uuid) }}'" class="cursor-pointer">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ $user->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $user->age }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $user->address }}</td>
@@ -34,11 +34,11 @@
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                     <button type="button" onclick="location.href='{{ route('admin.users.edit', $user->uuid) }}'"
                             class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none mr-3">
-                        Edit
+                        Chỉnh Sửa
                     </button>
                     <button type="button" data-id="{{ $user->uuid }}"
                             class="btn-delete inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none">
-                        Delete
+                        Xoá
                     </button>
                 </td>
             </tr>

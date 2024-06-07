@@ -44,14 +44,14 @@
             <label for="filter_student"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                 <input type="radio" name="filter_type" value="0" {{ request('filter_type', -1) == 0 ? 'checked' : '' }}
-                       class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                        id="filter_student">
                 <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Học Sinh</span>
             </label>
             <label for="filter_teacher"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                 <input type="radio" name="filter_type" value="1" {{ request('filter_type', -1) == 1 ? 'checked' : '' }}
-                       class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                        id="filter_teacher">
                 <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Giáo Viên</span>
             </label>
@@ -59,7 +59,7 @@
                 <label for="filter_admin"
                        class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                     <input type="radio" name="filter_type" value="2" {{ request('filter_type', -1) == 2 ? 'checked' : '' }}
-                           class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                    class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                            id="filter_admin">
                     <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Nhân Viên Và Admin</span>
                 </label>
@@ -71,7 +71,7 @@
             <div class="p-1.5 min-w-full inline-block align-middle">
                 <div class="border rounded-lg divide-y divide-gray-200">
                     <div class="py-3 px-4">
-                        <div class="relative">
+                        <div class="relative max-w-xs">
                             <label for="search" class="sr-only">Search</label>
                             <input type="text" name="search"
                                    id="search" value="{{ request('search') }}"
@@ -97,7 +97,6 @@
     @push('scripts')
         <script>
             function fetchData() {
-                console.log(document.getElementById('search').value)
                 axios.get('{{ route('admin.users.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
@@ -121,7 +120,7 @@
                 });
             });
 
-            document.getElementById('search').addEventListener('input', function (e) {
+            document.getElementById('search').addEventListener('keydown', function (e) {
                 let timeoutId;
 
                 clearTimeout(timeoutId);
