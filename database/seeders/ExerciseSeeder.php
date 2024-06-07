@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Execrise;
+use App\Models\Classroom;
+use App\Models\Exercise;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,32 +15,22 @@ class ExerciseSeeder extends Seeder
      */
     public function run(): void
     {
-        $exercises = [
-            [
-                'title' => 'Bài tập 1',
-                'description' => 'Bài tập 1',
-                'name_file_upload' => 'BaiTap1.pdf',
-                'user_id' => '9c3569dd-c15f-4b18-9455-8ffc7e92cfac',
-                'classroom_id' => 1,
-            ],
-            [
-                'title' => 'Bài tập 2',
-                'description' => 'Bài tập 2',
-                'name_file_upload' => 'BaiTap2.pdf',
-                'user_id' => '9c3569dd-c15f-4b18-9455-8ffc7e92cfac',
-                'classroom_id' => 1,
-            ],
-            [
-                'title' => 'Bài tập 3',
-                'description' => 'Bài tập 3',
-                'name_file_upload' => 'BaiTap3.pdf',
-                'user_id' => '9c3569dd-c15f-4b18-9455-8ffc7e92cfac',
-                'classroom_id' => 1,
-            ],
-        ];
+        $arr = [];
+        $faker = \Faker\Factory::create('vi_VN');
+        $classroomIds = Classroom::pluck('id')->toArray();
+        $userId = User::pluck('uuid')->toArray();
+        $extensionFile = ["docs", "jpg", "png", "excel", "docx", "doc"];
 
-        foreach ($exercises as $exercise) {
-            Execrise::create($exercise);
+        for ($i = 1; $i <= 10; $i++) {
+            $arr[] = [
+                'title' => $faker->sentence,
+                'description' => $faker->text,
+                'name_file_upload' => $faker->word . '.' . $faker->randomElement($extensionFile),
+                'user_id' => $faker->randomElement($userId),
+                'classroom_id' => $faker->randomElement($classroomIds),
+                'created_at' => now(),
+            ];
         }
+        Exercise::insert($arr);
     }
 }

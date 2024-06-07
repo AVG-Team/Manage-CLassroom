@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -27,6 +27,7 @@
     </section>
 </div>
 @vite('resources/js/auth.js')
+<x-partials.toast />
 @stack('scripts')
 </body>
 </html>
