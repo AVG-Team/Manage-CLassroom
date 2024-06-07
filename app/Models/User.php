@@ -89,7 +89,7 @@ class User extends Authenticatable
 
     public function exercises(): HasMany
     {
-        return $this->hasMany(Execrise::class);
+        return $this->hasMany(Exercise::class);
     }
 
     public function orders(): HasMany

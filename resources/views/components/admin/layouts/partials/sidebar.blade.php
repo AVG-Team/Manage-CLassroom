@@ -72,8 +72,13 @@
                             </a>
                         </li>
                         <li>
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100" href="{{ route('admin.exercises.index') }}">
+                                Quản Lý Bài Tập
+                            </a>
+                        </li>
+                        <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100" href="#">
-                                Quản Lý Tài Liệu
+                                Quản Lý Học Sinh Của Lớp Học
                             </a>
                         </li>
                     </ul>

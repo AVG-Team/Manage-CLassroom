@@ -13,7 +13,7 @@
     @section('title', $title)
     @section('title-content', $contentTitle)
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('admin.users.create') }}
+        {{ Breadcrumbs::render('admin.users.edit', $user->uuid) }}
     @endsection
     <div>
         <div class="flex flex-col gap-9">

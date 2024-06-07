@@ -19,8 +19,26 @@ Breadcrumbs::for('admin.users', function (BreadcrumbTrail $trail) {
     $trail->push('Quản Lý Người Dùng', route('admin.users.index'));
 });
 
-// Trang Chủ > Quản Lý Người Dùng > Quản lý học sinh
+// Trang Chủ > Quản Lý Người Dùng > Thêm Người Dùng
 Breadcrumbs::for('admin.users.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.users');
-    $trail->push('Quản Lý Người Dùng', route('admin.users.create'));
+    $trail->push('Thêm Người Dùng', route('admin.users.create'));
+});
+
+// Trang Chủ > Quản Lý Người Dùng > Chỉnh Sửa Người Dùng
+Breadcrumbs::for('admin.users.edit', function (BreadcrumbTrail $trail, $users) {
+    $trail->parent('admin.users');
+    $trail->push('Chỉnh Sửa Người Dùng', route('admin.users.edit', $users));
+});
+
+// Trang chủ > Quản Lý Người Dùng
+Breadcrumbs::for('admin.exercises', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Quản Lý Bài Tập', route('admin.exercises.index'));
+});
+
+// Trang Chủ > Quản Lý Người Dùng > Xem Chi Tiết Bài Tập
+Breadcrumbs::for('admin.exercises.edit', function (BreadcrumbTrail $trail, $exercise) {
+    $trail->parent('admin.exercises');
+    $trail->push('Xem Bài Tập', route('admin.exercises.edit', $exercise));
 });
