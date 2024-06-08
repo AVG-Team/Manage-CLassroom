@@ -42,3 +42,21 @@ Breadcrumbs::for('admin.exercises.edit', function (BreadcrumbTrail $trail, $exer
     $trail->parent('admin.exercises');
     $trail->push('Xem Bài Tập', route('admin.exercises.edit', $exercise));
 });
+
+// Trang chủ > Quản Lý Lớp Học
+Breadcrumbs::for('admin.classrooms', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Quản Lý Lớp Học', route('admin.classrooms.index'));
+});
+
+// Trang Chủ > Quản Lý Lớp Học > Thêm Lớp Học
+Breadcrumbs::for('admin.classrooms.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.classrooms');
+    $trail->push('Thêm Lớp học', route('admin.classrooms.create'));
+});
+
+// Trang Chủ > Quản Lý Lớp Học > Chỉnh Sửa Lớp Học
+Breadcrumbs::for('admin.classrooms.edit', function (BreadcrumbTrail $trail, $classroom) {
+    $trail->parent('admin.classrooms');
+    $trail->push('Chỉnh Sửa Lớp Học', route('admin.classrooms.edit', $classroom));
+});

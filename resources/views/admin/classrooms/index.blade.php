@@ -9,43 +9,76 @@
     @section('title', $title)
     @section('title-content', $contentTitle)
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('admin.exercises') }}
+        {{ Breadcrumbs::render('admin.classrooms') }}
     @endsection
     <div class="mb-3">
         <div>
             <div class="mb-3 grid sm:grid-cols-2">
                 <select name="per_page"
-                        class="w-[47%] border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
+                        class="w-[65%] border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
                     <option selected="" value="15">Số dòng hiển thị</option>
                     <option value="15">15</option>
                     <option value="30">30</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
+                <div style="direction: rtl">
+                    <x-user.form.buttons.primary href="#" class="px-3 py-3 flex !rounded" onclick="location.href='{{ route('admin.classrooms.create') }}'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </x-user.form.buttons.primary>
+                </div>
             </div>
         </div>
+
+        <div class="mb-3 grid sm:grid-cols-3 gap-x-4">
+            <select name="status"
+                    class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
+                <option {{ !request()->has("status") ?: "selected" }} value="-1">Tình Trạng</option>
+                @foreach(\App\Enums\ClassroomStatusEnum::getArrayView() as $key => $value)
+                    <option {{ request("status") === $value ? "selected" : "" }} value="{{ $value }}">{{ $key }}</option>
+                @endforeach
+            </select>
+            <select name="grade"
+                    class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
+                <option {{ !request()->has("grade") ?: "selected" }} value="-1">Lớp</option>
+                @for($i = 1; $i <= 12; $i++)
+                    <option {{ request("grade") == $i ? "selected" : "" }} value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+            <select name="subject"
+                    class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
+                <option {{ !request()->has("subject") ?: "selected" }} value="-1">Môn Học</option>
+                @foreach($subjects as $subject)
+                    <option {{ request("subject") == $subject->id ? "selected" : "" }} value="{{ $subject->id }}">{{ $subject->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <p class="mb-3 text-lg font-medium text-black">Tìm Kiếm Theo : </p>
         <div class="grid sm:grid-cols-3 gap-4">
-            <label for="filter_name_file"
+            <label for="filter_title"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-                <input type="radio" name="search_type" id="filter_name_file" value="0" {{ request('search_type', 0) == 0 ? 'checked' : '' }}
-                class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                <input type="radio" name="search_type" id="filter_title" value="0"
+                       {{ request('search_type', 0) == 0 ? 'checked' : '' }}
+                       class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                 >
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tên File</span>
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tiêu Đề Lớp</span>
             </label>
-            <label for="filter_name_user"
+            <label for="filter_code"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                 <input type="radio" name="search_type" value="1" {{ request('search_type', 0) == 1 ? 'checked' : '' }}
                 class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                       id="filter_name_user">
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tên Người Dùng</span>
+                       id="filter_code">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Mã Lớp Học</span>
             </label>
-            <label for="filter_title_classroom"
+            <label for="filter_name_teacher"
                    class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                 <input type="radio" name="search_type" value="2" {{ request('search_type', 0) == 2 ? 'checked' : '' }}
                 class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                       id="filter_title_classroom">
-                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tiêu Đề Lớp Học</span>
+                       id="filter_name_teacher">
+                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Tên Giáo Viên</span>
             </label>
         </div>
     </div>
@@ -77,6 +110,7 @@
             </div>
         </div>
     </div>
+
     @push('scripts')
         <script>
             function attachDeleteEventListeners() {
@@ -87,7 +121,7 @@
                         e.preventDefault();
                         const id = e.target.getAttribute('data-id');
                         console.log(123);
-                        const url = '{{ route('admin.exercises.delete', ':id') }}'.replace(':id', id);
+                        const url = '{{ route('admin.classrooms.delete', ':id') }}'.replace(':id', id);
                         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                         axios.delete(url, {
                             headers: {
@@ -131,11 +165,14 @@
             }
 
             function fetchData() {
-                axios.get('{{ route('admin.exercises.table') }}', {
+                axios.get('{{ route('admin.classrooms.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
                         search_type: document.querySelector('input[name="search_type"]:checked').value,
-                        search: document.getElementById('search').value
+                        search: document.getElementById('search').value,
+                        status: document.getElementsByName('status')[0].value,
+                        grade: document.getElementsByName('grade')[0].value,
+                        subject: document.getElementsByName('subject')[0].value,
                     }
                 })
                     .then(response => {
@@ -153,6 +190,18 @@
                 element.addEventListener('change', function (e) {
                     fetchData();
                 });
+            });
+
+            document.getElementsByName('status')[0].addEventListener('change', function (e) {
+                fetchData();
+            });
+
+            document.getElementsByName('grade')[0].addEventListener('change', function (e) {
+                fetchData();
+            });
+
+            document.getElementsByName('subject')[0].addEventListener('change', function (e) {
+                fetchData();
             });
 
             document.getElementById('search').addEventListener('input', function (e) {

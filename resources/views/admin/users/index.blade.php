@@ -96,49 +96,15 @@
     </div>
     @push('scripts')
         <script>
-            function fetchData() {
-                console.log(document.getElementById('search').value)
-                axios.get('{{ route('admin.users.table') }}', {
-                    params: {
-                        per_page: document.getElementsByName('per_page')[0].value,
-                        filter_type: document.querySelector('input[name="filter_type"]:checked').value,
-                        search: document.getElementById('search').value
-                    }
-                })
-                    .then(response => {
-                        document.getElementById('table').innerHTML = response.data.html;
-                    })
-                    .catch(error => console.error('Error fetching user data:', error));
-            }
 
-            document.getElementsByName('per_page')[0].addEventListener('change', function (e) {
-                fetchData();
-            });
-
-            document.getElementsByName('filter_type').forEach(function (element) {
-                element.addEventListener('change', function (e) {
-                    fetchData();
-                });
-            });
-
-            document.getElementById('search').addEventListener('input', function (e) {
-                let timeoutId;
-
-                clearTimeout(timeoutId);
-
-                timeoutId = setTimeout(fetchData, 500);
-            });
-
-            // delete
-            document.addEventListener('DOMContentLoaded', () => {
-                const deleteButtons = document.querySelectorAll('.btn-delete');
+            function attachDeleteEventListeners() {
+                let deleteButtons = document.querySelectorAll('.btn-delete');
                 deleteButtons.forEach((button) => {
+
                     button.addEventListener('click', (e) => {
                         e.preventDefault();
                         const id = e.target.getAttribute('data-id');
                         const url = '{{ route('admin.users.delete', ':id') }}'.replace(':id', id);
-                        console.log(url);
-                        console.log(id);
                         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                         axios.delete(url, {
                             headers: {
@@ -163,8 +129,9 @@
                                 }
                             })
                             .catch(error => {
+                                console.log(error);
                                 Toastify({
-                                    text: 'Xóa người dùng thất bại',
+                                    text: error.response.data.message,
                                     duration: 1000,
                                     close: true,
                                     gravity: "top", // `top` or `bottom`
@@ -178,6 +145,44 @@
                             });
                     });
                 });
+            }
+            function fetchData() {
+                console.log(document.getElementById('search').value)
+                axios.get('{{ route('admin.users.table') }}', {
+                    params: {
+                        per_page: document.getElementsByName('per_page')[0].value,
+                        filter_type: document.querySelector('input[name="filter_type"]:checked').value,
+                        search: document.getElementById('search').value
+                    }
+                })
+                    .then(response => {
+                        document.getElementById('table').innerHTML = response.data.html;
+                        attachDeleteEventListeners();
+                    })
+                    .catch(error => console.error('Error fetching user data:', error));
+            }
+
+            document.getElementsByName('per_page')[0].addEventListener('change', function (e) {
+                fetchData();
+            });
+
+            document.getElementsByName('filter_type').forEach(function (element) {
+                element.addEventListener('change', function (e) {
+                    fetchData();
+                });
+            });
+
+            document.getElementById('search').addEventListener('input', function (e) {
+                let timeoutId;
+
+                clearTimeout(timeoutId);
+
+                timeoutId = setTimeout(fetchData, 500);
+            });
+
+            // delete
+            document.addEventListener('DOMContentLoaded', () => {
+                attachDeleteEventListeners();
             })
         </script>
     @endpush

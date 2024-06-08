@@ -1,6 +1,14 @@
 <?php
 
 if(!function_exists("truncateString")) {
+    /**
+     * Cutting a string longer than $length will add a mark...
+     *
+     * @param string $string
+     * @param int $length
+     * @param string $ellipsis
+     * @return string
+     */
     function truncateString($string, $length = 20, $ellipsis = '...')
     {
         if (Str::length($string) <= $length) {
@@ -8,5 +16,21 @@ if(!function_exists("truncateString")) {
         }
 
         return Str::substr($string, 0, $length) . $ellipsis;
+    }
+}
+
+if (!function_exists('getFileName')) {
+    /**
+     * Get filename from path.
+     *
+     * @param string|null $path
+     * @return string
+     */
+    function getFileName(string $path = null): string
+    {
+        if (empty($path)) {
+            return '';
+        }
+        return basename($path);
     }
 }

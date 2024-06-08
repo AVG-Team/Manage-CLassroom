@@ -27,6 +27,7 @@ Route::group([
 
     Route::get('users', [UsersController::class, "index"])->name('users.index');
     Route::get('users/get-table', [UsersController::class, "getTableUsers"])->name('users.table');
+    Route::get('users/get-teacher', [UsersController::class, "getTeacher"])->name('users.get-teacher');
     Route::get('users/create', [UsersController::class, "create"])->name('users.create');
     Route::post('users/store', [UsersController::class, "store"])->name('users.store');
     Route::get('users/edit/{user:uuid}', [UsersController::class, "edit"])->name('users.edit');
@@ -39,5 +40,16 @@ Route::group([
     Route::get('exercises', [ExerciseController::class, "index"])->name('exercises.index');
     Route::get('exercises/get-table', [ExerciseController::class, "getTableExercise"])->name('exercises.table');
     Route::get('exercises/edit/{exercise:id}', [ExerciseController::class, "edit"])->name('exercises.edit');
+    Route::delete('exercises/delete/{exercise:id}', [ExerciseController::class, "delete"])->name('exercises.delete');
+    Route::delete('exercises/force-delete/{exercise:id}', [ExerciseController::class, "__forceDelete"])->name('exercises.force-delete');
+
+    Route::get('classrooms', [ClassroomController::class, "index"])->name('classrooms.index');
+    Route::get('classrooms/get-table', [ClassroomController::class, "getTableClassroom"])->name('classrooms.table');
+    Route::get('classrooms/create', [ClassroomController::class, "create"])->name('classrooms.create');
+    Route::post('classrooms/store', [ClassroomController::class, "store"])->name('classrooms.store');
+    Route::get('classrooms/edit/{classroom:id}', [ClassroomController::class, "edit"])->name('classrooms.edit');
+    Route::post('classrooms/update/{classroom:id}', [ClassroomController::class, "update"])->name('classrooms.update');
+    Route::delete('classrooms/delete/{classroom:id}', [ClassroomController::class, "delete"])->name('classrooms.delete');
+    Route::delete('classrooms/force-delete/{classroom:id}', [ClassroomController::class, "__forceDelete"])->name('classrooms.force-delete');
 });
 

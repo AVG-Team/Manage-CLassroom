@@ -72,6 +72,12 @@ class UsersController extends Controller
         ]);
     }
 
+    public function getTeacher()
+    {
+        $teachers = User::Where('role', UserRoleEnum::TEACHER)->get();
+        return response()->json($teachers);
+    }
+
     public function create()
     {
         $title = 'Thêm Người Dùng - ' . config('app.name');
@@ -144,7 +150,7 @@ class UsersController extends Controller
             $values = $request->validated();
 
             $email = $values['email'];
-            $userTmp = User::where('email' , $email)->first();
+            $userTmp = User::where('email', $email)->first();
 
             if ($userTmp && $userTmp->uuid != $user->uuid) {
                 return redirect()->back()->withErrors(['errors' => 'Email đã tồn tại']);

@@ -2,67 +2,192 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ManageUsersScribedRequest;
-use App\Models\ClassroomDetail;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Admin\Classroom\ManageClassroomRequest;
+use App\Http\Requests\Admin\Classroom\StoreClassroomRequest;
+use App\Http\Requests\Admin\Classroom\UpdateClassroomRequest;
+use App\Models\Classroom;
+use App\Models\Subject;
+use App\Traits\ResponseTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ClassroomController extends Controller
 {
-    public function index()
+    use ResponseTrait;
+    public function index(ManageClassroomRequest $request)
     {
-
-    }
-
-    public function usersSubscribed()
-    {
-        $contentTitle = 'Danh sách người dùng đã đăng ký';
+        $contentTitle = 'Danh sách lớp học';
         $title = $contentTitle . ' - ' . config('app.name');
-        return view('admin.classrooms.user-subscribed', [
+        $table = $this->getTableClassroom($request);
+        $subjects = Subject::all();
+        return view('admin.classrooms.index', [
             'title' => $title,
             'contentTitle' => $contentTitle,
+            'tableHtml' => $table,
+            'subjects' => $subjects,
         ]);
     }
 
-    public function getTableUsersSubcribed(ManageUsersScribedRequest $request)
+    public function getTableClassroom(ManageClassroomRequest $request)
     {
         $values = $request->validated();
         $perPage = $values['per_page'] ?? 15;
-        $user = Auth::user();
-        $type = $values['status'] ?? -1;
+        $status = $values['status'] ?? -1;
+        $search_type = $values['search_type'] ?? -1;
         $search = $values['search'] ?? '';
+        $grade = $values['grade'] ?? -1;
+        $subject = $values['subject'] ?? -1;
 
-        $query = User::query();
+        $query = Classroom::with(['teacher' => function ($query) {
+            $query->withTrashed();
+        }, 'subject']);
 
-        if (!empty($search) && strlen($search) >= 2) {
-            $query->search($search);
-        } else {
-            $query->where('name', 'like', '%' . $search . '%');
+        switch ($search_type) {
+            case 1:
+                $query->where('code_classroom', 'like', '%' . $search . '%');
+                break;
+            case 2:
+                if (!empty($search) && strlen($search) >= 2) {
+                    $query->whereHas('teacher', function ($query) use ($search) {
+                        $query->withTrashed();
+                        $query->search($search);
+                    });
+                } else {
+                    $query->whereHas('teacher', function ($query) use ($search) {
+                        $query->withTrashed();
+                        $query->where('name', 'like', '%' . $search . '%');
+                    });
+                }
+                break;
+            default:
+                $query->where('title', 'like', '%' . $search . '%');
+                break;
         }
+        if ($status != -1)
+            $query->where('status', $status);
+        if ($grade != -1)
+            $query->where('grade', $grade);
 
-        if ($type == -1) {
-            if (!$isAdmin) {
-                $query->where('role', '<', UserRoleEnum::STAFF);
-            }
-        } else if ($type == 2 && $isAdmin) {
-            $query->where('role', '>=', UserRoleEnum::STAFF);
-        } else {
-            $query->where('role', $type);
-        }
+        if ($subject != -1)
+            $query->where('subject_id', $subject);
 
-        $users = $query->paginate($perPage);
+        $classrooms = $query->paginate($perPage);
 
         if ($request->ajax()) {
             return response()->json([
-                'html' => view('admin.users.table', ['users' => $users])->render()
+                'html' => view('admin.classrooms.table', ['classrooms' => $classrooms])->render()
             ]);
         }
 
-        return view('admin.users.table', [
-            'users' => $users,
+        return view('admin.classrooms.table', [
+            'classrooms' => $classrooms,
         ]);
+    }
+
+    public function create()
+    {
+        $contentTitle = 'Thêm lớp học';
+        $title = $contentTitle . ' - ' . config('app.name');
+        $subjects = Subject::all();
+        return view('admin.classrooms.create', [
+            'title' => $title,
+            'contentTitle' => $contentTitle,
+            'subjects' => $subjects,
+        ]);
+    }
+
+    public function store(StoreClassroomRequest $request)
+    {
+        $values = $request->validated();
+        $teacher_id = $values['teacher_id'];
+
+        $isTeacherExist = Classroom::query()->where('teacher_id', $teacher_id)->where('status', 1)->exists();
+        if ($isTeacherExist) {
+            return redirect()->back()->withErrors(['Giáo viên này đã có lớp học đang hoạt động']);
+        }
+        $codeClassroom = Str::random(9);
+        $values['code_classroom'] = $codeClassroom;
+        $values['status'] = 0;
+        $path = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/classrooms', $imageName);
+        }
+
+        $values['image_path'] = $path;
+
+        try {
+            Classroom::create($values);
+            return redirect()->route('classrooms.index')->with('success', 'Thêm lớp học thành công');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Thêm lớp học thất bại');
+        }
+    }
+
+    public function edit(Classroom $classroom)
+    {
+        $contentTitle = 'Sửa lớp học';
+        $title = $contentTitle . ' - ' . config('app.name');
+        $subjects = Subject::all();
+        return view('admin.classrooms.edit', [
+            'title' => $title,
+            'contentTitle' => $contentTitle,
+            'classroom' => $classroom,
+            'subjects' => $subjects,
+        ]);
+    }
+
+    public function update(StoreClassroomRequest $request, Classroom $classroom)
+    {
+        $values = $request->validated();
+        $teacher_id = $values['teacher_id'];
+
+        $isTeacherExist = Classroom::query()->where('teacher_id', $teacher_id)->where('status', 1)->where('id', '!=', $classroom->id)->exists();
+        if ($isTeacherExist) {
+            return redirect()->back()->withErrors(['teacher_id' => 'Giáo viên này đã có lớp học đang hoạt động']);
+        }
+
+        $path = $classroom->image_path;
+
+        if ($request->hasFile('image')) {
+            if ($path && Storage::exists($path)) {
+                Storage::delete($path);
+            }
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/classrooms', $imageName);
+        }
+
+        $values['image_path'] = $path;
+
+        try {
+            $classroom->update($values);
+            return redirect()->route('admin.classrooms.index')->with('success', 'Sửa lớp học thành công');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Sửa lớp học thất bại');
+        }
+    }
+
+    public function delete(Classroom $classroom)
+    {
+        try {
+            $classroom->delete();
+            return $this->successResponse([], 'Xóa lớp học thành công');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Xóa lớp học thất bại');
+        }
+    }
+
+    public function __forceDelete(Classroom $classroom)
+    {
+        try {
+            $classroom->forceDelete();
+            return $this->successResponse([true], 'Xóa lớp học thành công');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Xóa lớp học thất bại');
+        }
     }
 }
