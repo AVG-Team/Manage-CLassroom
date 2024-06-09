@@ -1,4 +1,4 @@
-@props(['exercises'])
+@props(['exercises','classroom'])
 @if(auth()->user()->role == \App\Enums\UserRoleEnum::TEACHER)
 <div class="flex justify-start items-center gap-x-2 py-3  border-t dark:border-neutral-700">
     <button type="submit" data-hs-overlay="#hs-modal"
@@ -46,7 +46,7 @@
                 </h3>
                 <button type="button"
                         class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700"
-                        data-hs-overlay="#hs-medium-modal">
+                        data-hs-overlay="#hs-medium">
                     <span class="sr-only">Close</span>
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -59,7 +59,7 @@
 
             <div class="p-4 overflow-y-auto flex justify-center">
                 <div class="  w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm  sm:p-6  lg:p-8">
-                    <form method="POST" action="{{ route('exercise.store', $exercise->classroom_id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('exercise.store', $classroom->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6 grid grid-cols-2 gap-4">
                             <div class="col-span-2 sm:col-span-1">
@@ -93,8 +93,8 @@
                             @enderror
                         </div>
 
-                        <input type="hidden" name="classroom_id" value="{{ $exercise->classroom_id }}">
-                        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                        <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t ">
                             <button type="submit"
                                     class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                                 Tạo bài tập

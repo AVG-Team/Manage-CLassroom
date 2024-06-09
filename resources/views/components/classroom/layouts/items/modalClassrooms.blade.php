@@ -36,7 +36,7 @@
                                 @if ($class->teacher != null)
                                 <h2 class="text-md font-semibold">{{ $class->teacher->name}}</h2>
                                 @else
-                                <p class="text-red-500">Không có giáo viên được liên kết</p>
+                                <p class="text-red-500 text-sm">Không có giáo viên được liên kết</p>
                                 @endif
                                 <p class="mt-2 text-sm">
                                     Thời gian : 20:00 - 21:00

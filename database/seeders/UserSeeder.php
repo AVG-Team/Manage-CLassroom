@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $arr = [];
         $faker = \Faker\Factory::create('vi_VN');
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $arr[] = [
                 'name' => $faker->name(),
                 'email' => $faker->email(),

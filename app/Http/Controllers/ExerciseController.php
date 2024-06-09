@@ -20,6 +20,14 @@ class ExerciseController extends Controller
         return view('user.classroom.detailExercise', ['title' => $title], compact('classroom','classrooms', 'user','exercise'));
     }
 
+    public function showAll(){
+        $title = "Danh sách bài tập";
+        $user = auth()->user();
+        $classrooms = Classroom::all();
+
+        return view('user.page.all-exercises', ['title' => $title], compact('exercises','classrooms','user'));
+    }
+
 
     public function store(Request $request)
     {

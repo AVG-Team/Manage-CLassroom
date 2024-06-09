@@ -25,7 +25,7 @@ class ClassroomSeeder extends Seeder
                 'code_classroom' => strtoupper(Str::random(10)),
                 'status' => $faker->randomElement([0, 1]),
                 'price' => $faker->randomFloat(2, 1, 1000),
-                'category_id' => $faker->randomElement($categoryIds),
+                'subject_id' => $faker->randomElement($categoryIds),
             ];
         }
         Classroom::insert($arr);

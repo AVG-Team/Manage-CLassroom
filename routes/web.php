@@ -62,4 +62,5 @@ Route::get('/list-classroom', [ClassroomController::class, "showAll"])->name('li
 Route::post('/classroom/detail/{classroom}/exercise', [ExerciseController::class, "store"])->name('exercise.store');
 Route::patch('/classroom/ex/{exercise}', [ExerciseController::class, 'update'])->name('exercise.update');
 Route::post('/classroom/detail/{classroom}', [NotificationController::class, "store"])->name('notification.store');
+Route::get('/classroom/all-exercises', [ExerciseController::class, "showAll"])->name('all-exercises');
 

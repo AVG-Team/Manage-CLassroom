@@ -28,6 +28,7 @@
              class="absolute left-0 z-20 flex-col flex-wrap justify-end invisible w-full gap-6 p-8 transition-all duration-300 origin-top-right scale-90 translate-y-1 bg-white border border-gray-100 shadow-2xl opacity-0 top-full rounded-3xl shadow-gray-600/10 lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none">
             <div class="w-full text-gray-600 lg:w-auto lg:pr-4 lg:pt-0">
                 <ul class="flex flex-col items-center gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
+                    @if(auth()->user()->role == \App\Enums\UserRoleEnum::USER)
                     <li class="hidden w-full mr-2 lg:flex">
                         <button data-hs-overlay="#hs-vertically-centered-modal"
                                 class="flex items-center px-2 space-x-2 transition duration-300 rounded-full hover:shadow-md hover:shadow-gray-600/50">
@@ -37,7 +38,7 @@
                             </svg>
                         </button>
                     </li>
-
+                    @endif
                     <li class="relative w-full">
                         @if(auth()->check())
                         <div class="hidden lg:flex">
@@ -61,7 +62,7 @@
                                 <div
                                     class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2"
                                     aria-labelledby="hs-dropdown-custom-trigger">
-                                    @if(auth()->user()->role >= 1)
+                                    @if(auth()->user()->role > 1)
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
                                        href="#">
                                         Quản Lý Trang Web
@@ -97,7 +98,7 @@
                             </div>
                             <div
                                 class="mt-2 space-y-2 font-normal">
-                                @if(auth()->user()->role >= 1)
+                                @if(auth()->user()->role > 1)
                                 <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
                                    href="#">
                                     Quản Lý Trang Web

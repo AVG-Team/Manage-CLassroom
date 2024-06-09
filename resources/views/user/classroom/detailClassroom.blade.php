@@ -55,7 +55,7 @@
                      aria-labelledby="exercise-tab">
                     <div class="xl:container xl:px-4 mx-auto">
                         <div class="flex flex-col">
-                            <x-classroom.layouts.items.exercise :exercises='$exercises' />
+                            <x-classroom.layouts.items.exercise :exercises='$exercises' :classroom="$classroom" />
 
                         </div>
                     </div>

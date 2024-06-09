@@ -34,11 +34,18 @@ class PaymentController extends Controller
             $order['total'] = $request->price;
             $order['note'] = $request->note;
             $order['code_order'] = 'AVG' . Str::random(5) .time();
+            if($request->price = 0){
+                $order['status'] = 1;
+
+            }
             $order->save();
 
             $userSubscribed = new UserSubscribed();
             $userSubscribed['user_id']= $user->uuid;
             $userSubscribed['classroom_id'] = $request->classroom_id;
+            if($request->price = 0){
+                $userSubscribed['status'] = 1;
+            }
             $userSubscribed->save();
         }
 
