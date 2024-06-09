@@ -27,7 +27,7 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
         @foreach($classrooms as $classroom)
-            <tr onclick="if (!event.target.closest('button')) { location.href='{{ route('admin.exercises.edit', $classroom->id) }}' }"
+            <tr onclick="if (!event.target.closest('button')) { location.href='{{ route('admin.classrooms.edit', $classroom->id) }}' }"
                 class="cursor-pointer">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ truncateString($classroom->title) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->code_classroom }}</td>

@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\ClassroomController;
+use App\Http\Controllers\Admin\DefaultSalaryController;
 use App\Http\Controllers\Admin\ExerciseController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SalaryController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UsersSubscribedController;
 use App\Http\Middleware\CheckAnonymousAdminMiddleware;
@@ -25,7 +27,6 @@ Route::group([
 ], function () {
     Route::get('/logout', [LogoutController::class, "__invoke"])->name('logout');
     Route::get('/', [HomeController::class, "__invoke"])->name('home');
-    Route::get('/salary', [SalaryController::class, "index"])->name('salary');
 
     Route::get('users', [UsersController::class, "index"])->name('users.index');
     Route::get('users/get-table', [UsersController::class, "getTableUsers"])->name('users.table');
@@ -72,5 +73,20 @@ Route::group([
     Route::post('orders/update/{order:id}', [OrderController::class, "update"])->name('orders.update');
     Route::get('orders/delete/{order:id}', [OrderController::class, "delete"])->name('orders.delete');
     Route::delete('orders/force-delete/{order:id}', [OrderController::class, "__forceDelete"])->name('orders.force-delete');
+
+    Route::get('salaries', [SalaryController::class, "index"])->name('salaries.index');
+    Route::get('salaries/get-table', [SalaryController::class, "getTableSalary"])->name('salaries.table');
+    Route::get('salaries/create', [SalaryController::class, "create"])->name('salaries.create');
+    Route::post('salaries/store', [SalaryController::class, "store"])->name('salaries.store');
+    Route::get('salaries/edit/{salary:id}', [SalaryController::class, "edit"])->name('salaries.edit');
+    Route::post('salaries/update/{salary:id}', [SalaryController::class, "update"])->name('salaries.update');
+    Route::delete('salaries/delete/{salary:id}', [SalaryController::class, "delete"])->name('salaries.delete');
+    Route::delete('salaries/force-delete/{salary:id}', [SalaryController::class, "__forceDelete"])->name('salaries.force-delete');
+
+    Route::get('default-salary/get-table', [DefaultSalaryController::class, "getTableDefaultSalary"])->name('default-salary.table');
+    Route::resource('default-salary', DefaultSalaryController::class);
+
+    Route::get('subject/get-table', [SubjectController::class, "getTableSubject"])->name('subject.table');
+    Route::resource('subject', SubjectController::class);
 });
 

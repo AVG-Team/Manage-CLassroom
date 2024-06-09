@@ -20,14 +20,13 @@ class Salary extends Model
         'note',
     ];
 
-
     protected $appends = ['salary'];
 
     public $timestamps = true;
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 
     public function defaultSalary(): BelongsTo
@@ -37,6 +36,6 @@ class Salary extends Model
 
     public function getSalaryAttribute()
     {
-        return $this->defaultSalary->salary;
+        return $this->defaultSalary->salary + $this->bonus;
     }
 }

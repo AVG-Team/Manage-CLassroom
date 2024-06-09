@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Salary;
+namespace App\Http\Requests\Admin\DefaultSalary;
 
-use App\Rules\DefaultSalaryRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ManageSalaryRequest extends FormRequest
+class ManageDefaultSalaryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,7 @@ class ManageSalaryRequest extends FormRequest
         return [
             'page' => ["nullable", "integer"],
             'per_page' => ["nullable", "integer"],
-            'type' => ["nullable", "in:0,1"],
             'search' => ["nullable", "string"],
-            'status' => ["nullable", "in:-1,0,1,2"],
-            'month' => ["nullable", "integer", "min:-1", "max:12"],
-            'year' => ["nullable", "integer", 'max:' . date('Y')],
-            'default_salary' => ["nullable",  new DefaultSalaryRule()],
-            'has_bonus' => ["nullable", "in:0,1,-1"],
         ];
     }
 }
