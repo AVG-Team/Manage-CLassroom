@@ -16,8 +16,8 @@ final class PasswordResetTokenStatusEnum extends Enum
     public static function getArrayView(): array
     {
         return [
-            'Pending' => self::PENDING,
-            'Verified' => self::VERIFIED,
+            'Đang Chờ' => self::PENDING,
+            'Đã Xác Nhận' => self::VERIFIED,
         ];
     }
 

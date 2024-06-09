@@ -23,9 +23,12 @@
                     <option value="100">100</option>
                 </select>
                 <div style="direction: rtl">
-                    <x-user.form.buttons.primary href="#" class="px-3 py-3 flex !rounded" onclick="location.href='{{ route('admin.classrooms.create') }}'">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <x-user.form.buttons.primary href="#" class="px-3 py-3 flex !rounded"
+                                                 onclick="location.href='{{ route('admin.classrooms.create') }}'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                     </x-user.form.buttons.primary>
                 </div>
@@ -36,13 +39,16 @@
             <select name="status"
                     class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
                 <option {{ !request()->has("status") ?: "selected" }} value="-1">Tình Trạng</option>
-                @foreach(\App\Enums\ClassroomStatusEnum::getArrayView() as $key => $value)
-                    <option {{ request("status") === $value ? "selected" : "" }} value="{{ $value }}">{{ $key }}</option>
+                <option value="-1">Tất Cả</option>
+                @foreach(\App\Enums\OrderStatusEnum::getArrayView() as $key => $value)
+                    <option
+                        {{ request("status") === $value ? "selected" : "" }} value="{{ $value }}">{{ $key }}</option>
                 @endforeach
             </select>
             <select name="grade"
                     class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
                 <option {{ !request()->has("grade") ?: "selected" }} value="-1">Lớp</option>
+                <option value="-1">Tất Cả</option>
                 @for($i = 1; $i <= 12; $i++)
                     <option {{ request("grade") == $i ? "selected" : "" }} value="{{ $i }}">{{ $i }}</option>
                 @endfor
@@ -50,8 +56,10 @@
             <select name="subject"
                     class="border-solid border-[0.5px] py-3 px-4 pe-9 block border-gray-200 rounded-lg text-sm focus:border-secondary-500 focus:ring-secondary-500 disabled:opacity-50 disabled:pointer-events-none">
                 <option {{ !request()->has("subject") ?: "selected" }} value="-1">Môn Học</option>
+                <option value="-1">Tất Cả</option>
                 @foreach($subjects as $subject)
-                    <option {{ request("subject") == $subject->id ? "selected" : "" }} value="{{ $subject->id }}">{{ $subject->name }}</option>
+                    <option
+                        {{ request("subject") == $subject->id ? "selected" : "" }} value="{{ $subject->id }}">{{ $subject->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -113,6 +121,8 @@
 
     @push('scripts')
         <script>
+            let page = 1;
+
             function attachDeleteEventListeners() {
                 let deleteButtons = document.querySelectorAll('.btn-delete');
                 deleteButtons.forEach((button) => {
@@ -131,7 +141,7 @@
                             .then(response => {
                                 console.log(response);
                                 if (response.data.success) {
-                                    fetchData();
+                                    fetchData(page);
                                     Toastify({
                                         text: response.data.message,
                                         duration: 1000,
@@ -164,10 +174,11 @@
                 });
             }
 
-            function fetchData() {
+            function fetchData(page = 1) {
                 axios.get('{{ route('admin.classrooms.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
+                        page: page,
                         search_type: document.querySelector('input[name="search_type"]:checked').value,
                         search: document.getElementById('search').value,
                         status: document.getElementsByName('status')[0].value,
@@ -215,7 +226,29 @@
             // delete
             document.addEventListener('DOMContentLoaded', () => {
                 attachDeleteEventListeners();
+
+                document.getElementById('pagination').addEventListener('click', function (e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
+                });
             })
+
+            const table = document.getElementById('table');
+            const observer = new MutationObserver(function (mutationsList, observer) {
+                console.log('Table changed');
+                document.getElementById('pagination').addEventListener('click', function (e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
+                });
+            });
+
+            observer.observe(table, {childList: true, subtree: true});
         </script>
     @endpush
 </x-admin.layouts.app>

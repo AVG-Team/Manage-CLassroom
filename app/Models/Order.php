@@ -17,12 +17,18 @@ class Order extends Model
         'code_order',
         'user_id',
         'classroom_id',
+        'note',
     ];
 
     public $timestamps = true;
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
+    }
+
+    public function classroom(): BelongsTo
+    {
+        return $this->belongsTo(Classroom::class);
     }
 }

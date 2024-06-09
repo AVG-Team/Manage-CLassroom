@@ -46,6 +46,6 @@
         </tbody>
     </table>
 </div>
-<div class="py-1 px-4">
+<div class="py-1 px-4" id="pagination">
     {{ $users->links() }}
 </div>

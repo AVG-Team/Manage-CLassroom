@@ -60,3 +60,15 @@ Breadcrumbs::for('admin.classrooms.edit', function (BreadcrumbTrail $trail, $cla
     $trail->parent('admin.classrooms');
     $trail->push('Chỉnh Sửa Lớp Học', route('admin.classrooms.edit', $classroom));
 });
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký
+Breadcrumbs::for('admin.users-subscribed', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Danh Sách Học Viên Đã Đăng Ký', route('admin.users-subscribed.index'));
+});
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký > Thêm Học Viên
+Breadcrumbs::for('admin.users-subscribed.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.users-subscribed');
+    $trail->push('Thêm Học Viên', route('admin.users-subscribed.create'));
+});

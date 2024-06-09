@@ -9,7 +9,7 @@ if(!function_exists("truncateString")) {
      * @param string $ellipsis
      * @return string
      */
-    function truncateString($string, $length = 20, $ellipsis = '...')
+    function truncateString(string $string, int $length = 20, string $ellipsis = '...'): string
     {
         if (Str::length($string) <= $length) {
             return $string;

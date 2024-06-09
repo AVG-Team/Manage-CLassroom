@@ -8,7 +8,7 @@ use BenSampo\Enum\Enum;
  * @method static static PENDING()
  * @method static static APPROVE()
  */
-final class SalaryStatusEnum extends Enum
+final class UsersSubscribedStatusEnum extends Enum
 {
     public const PENDING = 0;
     public const APPROVE = 1;
@@ -17,7 +17,7 @@ final class SalaryStatusEnum extends Enum
     {
         return [
             'Đang Chờ' => self::PENDING,
-            'Đã Thanh Toán' => self::APPROVE,
+            'Đã Chấp Nhận' => self::APPROVE,
         ];
     }
 

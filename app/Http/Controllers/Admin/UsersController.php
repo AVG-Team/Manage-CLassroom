@@ -59,7 +59,7 @@ class UsersController extends Controller
             $query->where('role', $type);
         }
 
-        $users = $query->paginate($perPage);
+        $users = $query->paginate($perPage)->appends($request->all());
 
         if ($request->ajax()) {
             return response()->json([
@@ -75,6 +75,12 @@ class UsersController extends Controller
     public function getTeacher()
     {
         $teachers = User::Where('role', UserRoleEnum::TEACHER)->get();
+        return response()->json($teachers);
+    }
+
+    public function getStudent()
+    {
+        $teachers = User::Where('role', UserRoleEnum::USER)->get();
         return response()->json($teachers);
     }
 
@@ -114,7 +120,7 @@ class UsersController extends Controller
             ]);
 
             Mail::send('email.create-user-from-admin', compact('user', 'token', 'password'), function ($email) use ($user) {
-                $email->subject('Manage Events - Create Account Successfully');
+                $email->subject(config('app.name') . '- Tạo Tài Khoản Thành Công');
                 $email->to($user->email, $user->name);
             });
 

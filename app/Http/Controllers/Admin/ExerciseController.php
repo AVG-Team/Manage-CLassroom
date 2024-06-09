@@ -54,13 +54,21 @@ class ExerciseController extends Controller
                 }
                 break;
             case 2:
-                $query->whereHas('classroom', function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%');
-                });
+                if (!empty($search) && strlen($search) >= 2) {
+                    $query->whereHas('classroom', function ($query) use ($search) {
+                        $query->withTrashed();
+                        $query->search($search);
+                    });
+                } else {
+                    $query->whereHas('classroom', function ($query) use ($search) {
+                        $query->withTrashed();
+                        $query->where('title', 'like', '%' . $search . '%');
+                    });
+                }
                 break;
         }
 
-        $exercises = $query->paginate($perPage);
+        $exercises = $query->paginate($perPage)->appends($request->all());
 
         if ($request->ajax()) {
             return response()->json([

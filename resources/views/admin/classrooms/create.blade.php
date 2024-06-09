@@ -25,7 +25,7 @@
                     class="border-b border-stroke px-6.5 py-4"
                 >
                     <h3 class="font-medium text-black">
-                        Thông Tin Cá Nhân
+                        Thông Tin Lớp Học
                     </h3>
                 </div>
                 <form action="{{ route("admin.classrooms.store") }}" method="post" enctype="multipart/form-data">
@@ -102,7 +102,7 @@
                             <textarea id="description" name="description"
                                       class="{{ $errors->has('description') ? "check-input-error" : "" }} py-3 px-4 block w-full border-solid border border-gray-200 rounded-lg text-sm focus:border-secondary focus:ring-secondary focus:outline-secondary disabled:pointer-events-none"
                                       rows="3" placeholder="Nhập Mô Tả Lớp Học"
-                            > {{ old('description') }} </textarea>
+                            >{{ old('description') }}</textarea>
 
                             @if($errors->has('description'))
                                 <p class="text-red-500 mt-2 text-sm">{{ $errors->first('description') }}</p>
@@ -255,7 +255,7 @@
                             <div>
                                 <label for="price" class="block text-sm font-medium mb-2 dark:text-white">Giá</label>
                                 <div class="relative">
-                                    <input type="text" id="price" name="price" value="{{ old('price') }}" class="border-solid border py-3 pl-12 px-4 ps-9 pe-16 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="0.00">
+                                    <input type="text" id="price" name="price" value="{{ old('price') }}" class="border-solid border py-3 pl-13 px-4 ps-9 pe-16 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="0.00">
                                     <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4 ">
                                         <span class="text-gray-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

@@ -28,7 +28,8 @@
                         Thông Tin Lớp Học
                     </h3>
                 </div>
-                <form action="{{ route("admin.classrooms.update", $classroom->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route("admin.classrooms.update", $classroom->id) }}" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="p-6.5">
                         <div class="mb-4.5">
@@ -74,12 +75,14 @@
                                                 <path d="m21 21-4.3-4.3"></path>
                                             </svg>
                                         </div>
-                                        <input id="hs-combo-box-hidden" name="teacher_id" type="text" value="{{ old('teacher_id') ?: $classroom->teacher_id }}"
+                                        <input id="hs-combo-box-hidden" name="teacher_id" type="text"
+                                               value="{{ old('teacher_id') ?: $classroom->teacher_id }}"
                                                data-hs-combo-box-input=""
                                                class="py-3 ps-10 pe-4 block w-full border-solid border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                                placeholder="Nhập Tên Giáo Viên">
                                     </div>
-                                    <p class="text-sm text-secondary mt-3"><span>*</span>{{ $classroom->user != null ? $classroom->user->name : "" }}</p>
+                                    <p class="text-sm text-secondary mt-3">
+                                        <span>*</span>{{ $classroom->user != null ? $classroom->user->name : "" }}</p>
                                     @if($errors->has('teacher_id'))
                                         <p class="text-red-500 mt-2 text-sm">{{ $errors->first('teacher_id') }}</p>
                                     @endif
@@ -107,7 +110,7 @@
                             <textarea id="description" name="description"
                                       class="{{ $errors->has('description') ? "check-input-error" : "" }} py-3 px-4 block w-full border-solid border border-gray-200 rounded-lg text-sm focus:border-secondary focus:ring-secondary focus:outline-secondary disabled:pointer-events-none"
                                       rows="3" placeholder="Nhập Mô Tả Lớp Học"
-                            > {{ old('description') ?: $classroom->description }} </textarea>
+                            >{{ old('description') ?: $classroom->description }}</textarea>
 
                             @if($errors->has('description'))
                                 <p class="text-red-500 mt-2 text-sm">{{ $errors->first('description') }}</p>
@@ -137,10 +140,13 @@
                                                 dark:hover:file:bg-blue-400
                                               " id="image_input">
                                 </label>
-                                <p class="text-sm text-gray-500 mt-2" id="error_message">Chấp nhận các tệp JPG, PNG, GIF, BMP. Kích thước tệp tối đa 5MB</p>
-                                <div class="mt-3 {{ $classroom->image_path != null ? "" : "hidden" }}" id="image_preview_parent">
+                                <p class="text-sm text-gray-500 mt-2" id="error_message">Chấp nhận các tệp JPG, PNG,
+                                    GIF, BMP. Kích thước tệp tối đa 5MB</p>
+                                <div class="mt-3 {{ $classroom->image_path != null ? "" : "hidden" }}"
+                                     id="image_preview_parent">
                                     <p class="text-lg font-medium">Ảnh xem trước : </p>
-                                    <img src="{{ Storage::url($classroom->image_path) }}" class="h-[30vh]" id="image_preview" alt="ảnh xem trước">
+                                    <img src="{{ Storage::url($classroom->image_path) }}" class="h-[30vh]"
+                                         id="image_preview" alt="ảnh xem trước">
                                 </div>
                             </div>
 
@@ -163,7 +169,8 @@
                                             class="{{ $errors->has('subject_id') ? "check-input-error" : "" }} relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-secondary active:border-secondary"
                                         >
                                             @foreach($subjects as $subject)
-                                                <option value="{{ $subject->id }}" {{ $classroom->subject_id == $subject->id ? "selected" : "" }}
+                                                <option value="{{ $subject->id }}"
+                                                        {{ $classroom->subject_id == $subject->id ? "selected" : "" }}
                                                         class="text-body" {{ old('subject') == $subject->id ? "selected" : "" }}>{{ $subject->name }}</option>
                                             @endforeach
                                         </select>
@@ -194,7 +201,7 @@
                                 </div>
                                 <div>
                                     <label for="grade"
-                                        class="mb-3 block text-sm font-medium text-black"
+                                           class="mb-3 block text-sm font-medium text-black"
                                     >
                                         Lớp Học <span class="text-meta-1">*</span>
                                     </label>
@@ -203,12 +210,12 @@
                                         class="relative z-20 bg-white"
                                     >
                                         <select id="grade"
-                                            name="grade"
-                                            class="{{ $errors->has('grade') ? "check-input-error" : "" }} relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-secondary active:border-secondary"
+                                                name="grade"
+                                                class="{{ $errors->has('grade') ? "check-input-error" : "" }} relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-secondary active:border-secondary"
                                         >
                                             @for($i = 1; $i <= 12; $i++)
                                                 <option value="{{ $i }}" {{ $classroom->grade == $i ? "selected" : "" }}
-                                                        class="text-body" {{ old('grade') == $i ? "selected" : "" }}>{{ $i }}</option>
+                                                class="text-body" {{ old('grade') == $i ? "selected" : "" }}>{{ $i }}</option>
                                             @endfor
                                         </select>
                                         <span
@@ -260,18 +267,70 @@
                             <div>
                                 <label for="price" class="block text-sm font-medium mb-2 dark:text-white">Giá</label>
                                 <div class="relative">
-                                    <input type="text" id="price" name="price" value="{{ old('price') ?: $classroom->price }}" class="border-solid border py-3 pl-12 px-4 ps-9 pe-16 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="0.00">
-                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4 ">
+                                    <input type="text" id="price" name="price"
+                                           value="{{ old('price') ?: $classroom->price }}"
+                                           class="border-solid border py-3 pl-13 px-4 ps-9 pe-16 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                           placeholder="0.00">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4 ">
                                         <span class="text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/>
                                             </svg>
                                         </span>
                                     </div>
-                                    <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-4">
+                                    <div
+                                        class="absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-4">
                                         <span class="text-gray-500 dark:text-neutral-500">VNĐ</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4.5">
+                            <div>
+                                <label for="status" class="mb-3 block text-sm font-medium text-black">
+                                    Tính Trạng Lớp Học <span class="text-meta-1">*</span>
+                                </label>
+
+                                <div
+                                    class="relative z-20 bg-white"
+                                >
+                                    <select
+                                        name="status" id="status"
+                                        class="{{ $errors->has('status') ? "check-input-error" : "" }} relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 pl-5 pr-12 outline-none transition focus:border-secondary active:border-secondary"
+                                    >
+                                        @foreach(\App\Enums\ClassroomStatusEnum::getArrayView() as $key => $value)
+                                            <option value="{{ $value }}"
+                                                    class="text-body" {{ ( old('status') ?: $classroom->status ) == $value ? "selected" : "" }}>{{ $key }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        class="absolute right-4 top-1/2 z-10 -translate-y-1/2"
+                                    >
+                                          <svg
+                                              width="24"
+                                              height="24"
+                                              viewBox="0 0 24 24"
+                                              fill="none"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <g opacity="0.8">
+                                              <path
+                                                  fill-rule="evenodd"
+                                                  clip-rule="evenodd"
+                                                  d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
+                                                  fill="#637381"
+                                              ></path>
+                                            </g>
+                                          </svg>
+                                        </span>
+                                </div>
+                                @if($errors->has('status'))
+                                    <p class="text-red-500 mt-2 text-sm">{{ $errors->first('status') }}</p>
+                                @endif
                             </div>
                         </div>
                         <x-user.form.buttons.primary type="submit"
@@ -283,51 +342,51 @@
         </div>
     </div>
     @push('scripts')
-            <script>
-                const imageInput = document.getElementById('image_input');
-                const imagePreview = document.getElementById('image_preview');
-                const imagePreviewParent = document.getElementById('image_preview_parent');
-                const errorMessage = document.getElementById('error_message');
-                const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
+        <script>
+            const imageInput = document.getElementById('image_input');
+            const imagePreview = document.getElementById('image_preview');
+            const imagePreviewParent = document.getElementById('image_preview_parent');
+            const errorMessage = document.getElementById('error_message');
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
 
-                imageInput.addEventListener('change', function (event) {
-                    const [file] = event.target.files;
-                    if (file) {
-                        let error = "";
-                        if (!validImageTypes.includes(file.type)) {
-                            error = "Vui lòng chọn một tệp ảnh hợp lệ (JPEG, PNG, GIF, BMP).";
-                            errorMessage.classList.add('text-red-500')
-                            errorMessage.classList.remove('text-gray-500');
-                            imagePreview.src = "";
-                        }
-
-                        if (file.size > 5 * 1024 * 1024) { // 5MB
-                            error = "Kích thước tệp quá lớn. Vui lòng chọn tệp nhỏ hơn 5MB.";
-                            errorMessage.classList.add('text-red-500')
-                            errorMessage.classList.remove('text-gray-500');
-                            imagePreview.src = "";
-                        }
-
-                        if(error !== "") {
-                            errorMessage.textContent = error;
-                            alert(error)
-                            imageInput.value = "";
-                            return;
-                        }
-
-                        errorMessage.classList.add('text-gray-500')
-                        errorMessage.classList.remove('text-red-500');
-
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            imagePreview.src = e.target.result;
-                            if(imagePreviewParent.classList.contains('hidden')) {
-                                imagePreviewParent.classList.remove('hidden');
-                            }
-                        }
-                        reader.readAsDataURL(file);
+            imageInput.addEventListener('change', function (event) {
+                const [file] = event.target.files;
+                if (file) {
+                    let error = "";
+                    if (!validImageTypes.includes(file.type)) {
+                        error = "Vui lòng chọn một tệp ảnh hợp lệ (JPEG, PNG, GIF, BMP).";
+                        errorMessage.classList.add('text-red-500')
+                        errorMessage.classList.remove('text-gray-500');
+                        imagePreview.src = "";
                     }
-                });
-            </script>
+
+                    if (file.size > 5 * 1024 * 1024) { // 5MB
+                        error = "Kích thước tệp quá lớn. Vui lòng chọn tệp nhỏ hơn 5MB.";
+                        errorMessage.classList.add('text-red-500')
+                        errorMessage.classList.remove('text-gray-500');
+                        imagePreview.src = "";
+                    }
+
+                    if (error !== "") {
+                        errorMessage.textContent = error;
+                        alert(error)
+                        imageInput.value = "";
+                        return;
+                    }
+
+                    errorMessage.classList.add('text-gray-500')
+                    errorMessage.classList.remove('text-red-500');
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        if (imagePreviewParent.classList.contains('hidden')) {
+                            imagePreviewParent.classList.remove('hidden');
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        </script>
     @endpush
 </x-admin.layouts.app>

@@ -27,14 +27,15 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
         @foreach($classrooms as $classroom)
-            <tr onclick="if (!event.target.closest('button')) { location.href='{{ route('admin.exercises.edit', $classroom->id) }}' }" class="cursor-pointer">
+            <tr onclick="if (!event.target.closest('button')) { location.href='{{ route('admin.exercises.edit', $classroom->id) }}' }"
+                class="cursor-pointer">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ truncateString($classroom->title) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->code_classroom }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->teacher == null ? "Chưa có" : $classroom->teacher->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->subject->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->grade }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ \App\Enums\ClassroomStatusEnum::getKeyByValue($classroom->status) }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                     <button type="button" onclick="location.href='{{ route('admin.classrooms.edit', $classroom->id) }}'"
                             class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none mr-3">
                         Chỉnh Sửa
@@ -49,6 +50,6 @@
         </tbody>
     </table>
 </div>
-<div class="py-1 px-4">
+<div class="py-1 px-4" id="pagination">
     {{ $classrooms->links() }}
 </div>

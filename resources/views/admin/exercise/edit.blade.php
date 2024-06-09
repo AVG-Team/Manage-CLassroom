@@ -61,7 +61,7 @@
                             </label>
                             <textarea id="description" name="description" disabled
                                       class="{{ $errors->has('description') ? "check-input-error" : "" }} py-3 px-4 block w-full border-solid border border-gray-200 bg-gray-200 rounded-lg text-sm focus:border-secondary focus:ring-blue-500 disabled:pointer-events-none" rows="3" placeholder="Nhập Mô Tả Bài Tập"
-                            > {{ $exercise->description }} </textarea>
+                            >{{ $exercise->description }}</textarea>
 
                             @if($errors->has('description'))
                                 <p class="text-red-500 mt-2 text-sm">{{ $errors->first('description') }}</p>

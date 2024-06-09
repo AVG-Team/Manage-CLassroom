@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ClassroomStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Classroom\ManageClassroomRequest;
 use App\Http\Requests\Admin\Classroom\StoreClassroomRequest;
-use App\Http\Requests\Admin\Classroom\UpdateClassroomRequest;
 use App\Models\Classroom;
 use App\Models\Subject;
 use App\Traits\ResponseTrait;
@@ -61,7 +61,11 @@ class ClassroomController extends Controller
                 }
                 break;
             default:
-                $query->where('title', 'like', '%' . $search . '%');
+                if (!empty($search) && strlen($search) >= 2) {
+                    $query->search($search);
+                } else {
+                    $query->where('title', 'like', '%' . $search . '%');
+                }
                 break;
         }
         if ($status != -1)
@@ -72,7 +76,7 @@ class ClassroomController extends Controller
         if ($subject != -1)
             $query->where('subject_id', $subject);
 
-        $classrooms = $query->paginate($perPage);
+        $classrooms = $query->paginate($perPage)->appends($request->all());
 
         if ($request->ajax()) {
             return response()->json([
@@ -83,6 +87,20 @@ class ClassroomController extends Controller
         return view('admin.classrooms.table', [
             'classrooms' => $classrooms,
         ]);
+    }
+
+    public function getClassroom()
+    {
+        $statusCloseClassroom = ClassroomStatusEnum::CLOSE;
+        $classrooms = Classroom::with('teacher')->where('status', '!=', $statusCloseClassroom)->get();
+
+        $classrooms = $classrooms->map(function ($classroom) {
+            $teacherName = $classroom->teacher ? ' - ' . $classroom->teacher->name : '';
+            $tmpTitle = $classroom->title . ' - ' . $classroom->grade . $teacherName . ' - ' . $classroom->id;
+            $classroom->title = $tmpTitle;
+            return $classroom;
+        });
+        return response()->json($classrooms);
     }
 
     public function create()

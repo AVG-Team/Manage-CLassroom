@@ -79,6 +79,7 @@
     </div>
     @push('scripts')
         <script>
+            let page = 1;
             function attachDeleteEventListeners() {
                 let deleteButtons = document.querySelectorAll('.btn-delete');
                 deleteButtons.forEach((button) => {
@@ -97,7 +98,7 @@
                             .then(response => {
                                 console.log(response);
                                 if (response.data.success) {
-                                    fetchData();
+                                    fetchData(page);
                                     Toastify({
                                         text: response.data.message,
                                         duration: 1000,
@@ -130,10 +131,11 @@
                 });
             }
 
-            function fetchData() {
+            function fetchData(page = 1) {
                 axios.get('{{ route('admin.exercises.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
+                        page: page,
                         search_type: document.querySelector('input[name="search_type"]:checked').value,
                         search: document.getElementById('search').value
                     }
@@ -166,7 +168,28 @@
             // delete
             document.addEventListener('DOMContentLoaded', () => {
                 attachDeleteEventListeners();
+                document.getElementById('pagination').addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
+                });
             })
+
+            const table = document.getElementById('table');
+            const observer = new MutationObserver(function(mutationsList, observer) {
+                console.log('Table changed');
+                document.getElementById('pagination').addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
+                });
+            });
+
+            observer.observe(table, { childList: true, subtree: true });
         </script>
     @endpush
 </x-admin.layouts.app>
