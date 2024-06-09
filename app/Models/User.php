@@ -90,12 +90,12 @@ class User extends Authenticatable
 
     public function exercises(): HasMany
     {
-        return $this->hasMany(Exercise::class);
+        return $this->hasMany(Exercise::class,"user_id");
     }
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class,'user_id');
     }
 
     public function salaries(): HasMany
@@ -114,4 +114,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Classroom::class, 'teacher_id', 'uuid');
     }
+
 }

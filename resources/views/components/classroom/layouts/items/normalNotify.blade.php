@@ -3,9 +3,9 @@
         <div class="flex items-center">
             <div class="flex-shrink-0">
                 <div
-                    class="w-[2.2rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem] bg-[#FFF9D0] flex justify-center items-center">
-                    <div class="inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
-                        N
+                    class="w-[2.2rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem] bg-[#5AB2FF] flex justify-center items-center">
+                    <div class="inset-0 flex items-center justify-center text-xl font-bold text-[#FFF9D0]">
+                        GV
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div
                 class="w-[2.2rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem] bg-[#FFF9D0] flex justify-center items-center">
                 <div class="inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
-                    N
+                    HS
                 </div>
             </div>
             <input type="text" class="w-full h-10 ml-4 text-sm border rounded-xl"

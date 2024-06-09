@@ -23,6 +23,12 @@
                     <ul class="flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
                         <li class="w-full">
                             <a class="md:px-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline whitespace-nowrap"
+                               href="{{ route('list-classroom') }}">
+                                Danh sách khoá học
+                            </a>
+                        </li>
+                        <li class="w-full">
+                            <a class="md:px-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline whitespace-nowrap"
                                href="/classroom">
                                 Lớp học
                             </a>

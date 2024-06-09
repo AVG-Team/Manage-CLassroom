@@ -1,17 +1,22 @@
+@props(['classroom'])
 <div class="h-auto mb-6 border shadow-md rounded-xl">
     <button id="notifyBtn"
-            class="flex items-center justify-start w-full h-16 border rounded-xl hover:bg-gray-100 hover:text-blue-400">
+            class="flex items-center justify-start w-full h-16 border rounded-xl hover:bg-gray-100 hover:text-blue-400 p-4">
         <div
-            class="w-[2.2rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem] bg-[#FFF9D0] mx-3 flex justify-center items-center">
-            <div class="inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
-                N
+            class="mr-4 w-[2.2rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem] bg-[#5AB2FF] flex justify-center items-center">
+            <div class="inset-0 flex items-center justify-center text-xl font-bold text-[#FFF9D0]">
+                GV
             </div>
         </div>
         <p class="text-sm text-gray-500 hover:text-blue-400">Thông báo nội dung nào đó cho lớp học của bạn</p>
     </button>
-    <div id="notify" class="hidden w-full p-4 bg-white shadow-lg rounded-xl">
-        <textarea class="w-full p-2 mb-4 border-2 rounded border-b-blue-600" rows="4"
-                  placeholder="Thông báo nội dung nào đó cho lớp học của bạn"></textarea>
+    <form action="{{ route('notification.store', $classroom->id ) }}" method="POST" id="notify" enctype="multipart/form-data"
+              class="hidden w-full p-4 bg-white shadow-lg rounded-xl">
+        @csrf
+        <label for="content" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Tiêu đề</label>
+        <textarea name="content" id="content" class="w-full p-2 mb-4 border-2 rounded border-b-blue-600" rows="4">
+
+        </textarea>
         <div class="flex items-center justify-between w-full">
             <div class="flex space-x-2">
                 <button class="p-2 rounded-full hover:bg-gray-200">
@@ -50,10 +55,10 @@
                 </button>
             </div>
             <div class="flex space-x-2">
-                <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Đăng</button>
-                <button id="cancelBtn" class="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">Huỷ
+                <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Đăng</button>
+                <button type="reset" id="cancelBtn" class="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300">Huỷ
                 </button>
             </div>
         </div>
-    </div>
+    </form>
 </div>

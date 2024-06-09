@@ -22,6 +22,8 @@
         </main>
         <!-- End Content  -->
 
+        <x-classroom.layouts.items.modalClassrooms :classrooms="$classrooms" :user="$user"/>
+
 
 
     </div>

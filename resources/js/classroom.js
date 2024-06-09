@@ -43,27 +43,6 @@ links.forEach((link) => {
 });
 // end navbar
 
-const sidebars = document.getElementsByClassName("subSidebar");
-const subItems = document.getElementsByClassName("subItem");
-const iconOpens = document.getElementsByClassName("iconOpen");
-const iconCloses = document.getElementsByClassName("iconClose");
-
-
-Array.from(sidebars).forEach((sidebar, index) => {
-    sidebar.addEventListener("click", () => {
-       isToggled = !isToggled;
-        if (isToggled) {
-            subItems[index].classList.add("hidden");
-            iconCloses[index].classList.add("hidden");
-            iconOpens[index].classList.remove("hidden");
-        } else {
-            subItems[index].classList.remove("hidden");
-            iconCloses[index].classList.remove("hidden");
-            iconOpens[index].classList.add("hidden");
-        }
-    });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll('[role="tab"]');
     const tabContents = document.querySelectorAll('[role="tabpanel"]');
@@ -105,19 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tabs[0].click();
 });
 
-const notifyBtn = document.getElementById("notifyBtn");
-const notify = document.getElementById("notify");
-const cancelBtn = document.getElementById("cancelBtn");
 
-notifyBtn.addEventListener("click", () => {
-    notifyBtn.classList.toggle("hidden");
-    notify.classList.toggle("hidden");
-});
-
-cancelBtn.addEventListener("click", () => {
-    notifyBtn.classList.toggle("hidden");
-    notify.classList.toggle("hidden");
-});
 
 const exerciseBtns = document.getElementsByClassName("exerciseBtn");
 const descriptions = document.getElementsByClassName("description");
@@ -165,3 +132,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const notifyBtn = document.getElementById("notifyBtn");
+const notify = document.getElementById("notify");
+const cancelBtn = document.getElementById("cancelBtn");
+
+notifyBtn.addEventListener("click", () => {
+    notifyBtn.classList.toggle("hidden");
+    notify.classList.toggle("hidden");
+});
+
+cancelBtn.addEventListener("click", () => {
+    notifyBtn.classList.toggle("hidden");
+    notify.classList.toggle("hidden");
+});
