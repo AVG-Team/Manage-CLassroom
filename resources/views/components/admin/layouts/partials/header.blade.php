@@ -149,7 +149,7 @@
                     aria-labelledby="hs-dropdown-default">
                     <ul class="flex flex-col gap-5 border-b border-stroke px-6 py-7.5">
                         <li>
-                            <a href="profile.html"
+                            <a href="{{ route('profile') }}"
                                class="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-secondary lg:text-base">
                                 <svg
                                     class="fill-current"
