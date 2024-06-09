@@ -43,28 +43,6 @@ links.forEach((link) => {
 });
 // end navbar
 
-const sidebar = document.getElementById("subSidebar");
-const subItem = document.getElementById("subItem");
-const iconOpen = document.getElementById("iconOpen");
-const iconClose = document.getElementById("iconClose");
-
-function toggleSidebar() {
-    if (isToggled) {
-        subItem.classList.add("hidden");
-        iconClose.classList.add("hidden");
-        iconOpen.classList.remove("hidden");
-    } else {
-        subItem.classList.remove("hidden");
-        iconClose.classList.remove("hidden");
-        iconOpen.classList.add("hidden");
-    }
-}
-
-sidebar.addEventListener("click", () => {
-    isToggled = !isToggled;
-    toggleSidebar();
-});
-
 document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll('[role="tab"]');
     const tabContents = document.querySelectorAll('[role="tabpanel"]');
@@ -106,19 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tabs[0].click();
 });
 
-const notifyBtn = document.getElementById("notifyBtn");
-const notify = document.getElementById("notify");
-const cancelBtn = document.getElementById("cancelBtn");
 
-notifyBtn.addEventListener("click", () => {
-    notifyBtn.classList.toggle("hidden");
-    notify.classList.toggle("hidden");
-});
-
-cancelBtn.addEventListener("click", () => {
-    notifyBtn.classList.toggle("hidden");
-    notify.classList.toggle("hidden");
-});
 
 const exerciseBtns = document.getElementsByClassName("exerciseBtn");
 const descriptions = document.getElementsByClassName("description");
@@ -141,3 +107,41 @@ Array.from(exerciseBtns).forEach((exerciseBtn, index) => {
     });
 });
 
+// Modal
+document.addEventListener("DOMContentLoaded", () => {
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtns = document.querySelectorAll("#closeModalBtn, #closeModalBtnBottom");
+    const modal = document.getElementById("myModal");
+
+    openModalBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+    });
+
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+    });
+
+    // Close the modal when clicking outside the modal content
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+});
+
+
+const notifyBtn = document.getElementById("notifyBtn");
+const notify = document.getElementById("notify");
+const cancelBtn = document.getElementById("cancelBtn");
+
+notifyBtn.addEventListener("click", () => {
+    notifyBtn.classList.toggle("hidden");
+    notify.classList.toggle("hidden");
+});
+
+cancelBtn.addEventListener("click", () => {
+    notifyBtn.classList.toggle("hidden");
+    notify.classList.toggle("hidden");
+});

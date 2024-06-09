@@ -1,4 +1,4 @@
-<x-classroom.layouts.app>
+<x-classroom.layouts.app :classrooms="$classrooms"  :user="$user">s
     <div class="p-4 sm:ml-56 lg:ml-80">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-14">
             <div class="mb-4 border-b border-gray-200 shadow-lg">
@@ -14,14 +14,15 @@
                     <li class="me-2" role="presentation">
                         <button id="exercise-tab" data-tabs-target="#exercise" type="button" role="tab"
                                 aria-controls="exercise" aria-selected="false"
-                                class="inline-block xl:p-4 px-2 py-4  rounded-t-lg hover:text-gray-600 hover:bg-gray-50 ">Bài tập trên
-                            lớp
+                                class="inline-block xl:p-4 px-2 py-4  rounded-t-lg hover:text-gray-600 hover:bg-gray-50 ">
+                            Bài tập trên lớp
                         </button>
                     </li>
                     <li class="me-2" role="presentation">
                         <button id="everyone-tab" data-tabs-target="#everyone" type="button" role="tab"
                                 aria-controls="everyone" aria-selected="false"
-                                class="inline-block xl:p-4 px-2 py-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Mọi người
+                                class="inline-block xl:p-4 px-2 py-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">
+                            Mọi người
                         </button>
                     </li>
                 </ul>
@@ -30,8 +31,9 @@
                 <div class="hidden p-4 rounded-lg bg-gray-50 " id="dashboard" role="tabpanel"
                      aria-labelledby="dashboard-tab">
                     <div class="grid gap-4">
-                        <div class="w-full bg-blue-400 rounded-lg h-52">
-                            <h1 class="text-white">Bảng tin</h1>
+                        <div class="w-full bg-blue-400 rounded-lg h-52 flex flex-col justify-center items-center">
+                            <h1 class="text-white text-3xl">{{ $classroom->title }}</h1>
+                            <h1 class="text-white text-3xl mt-2">Giáo viên: {{ $classroom->teacher->name }}</h1>
                         </div>
                         <div class="grid grid-cols-5 gap-3">
                             <div class="w-full p-4 bg-white rounded-lg shadow-md h-36 xl:block hidden">
@@ -39,9 +41,11 @@
                             </div>
                             <div class="w-full h-auto xl:col-span-4 col-span-5">
                                 <div class="w-full h-auto">
-                                    <x-classroom.layouts.items.createNotify/>
+                                    @if(auth()->user()->role == \App\Enums\UserRoleEnum::TEACHER)
+                                    <x-classroom.layouts.items.createNotify :classroom="$classroom"/>
+                                    @endif
                                     <x-classroom.layouts.items.exerciseNotify/>
-                                    <x-classroom.layouts.items.normalNotify/>
+                                    <x-classroom.layouts.items.normalNotify :notifications="$notifications"/>
                                 </div>
                             </div>
                         </div>
@@ -51,9 +55,8 @@
                      aria-labelledby="exercise-tab">
                     <div class="xl:container xl:px-4 mx-auto">
                         <div class="flex flex-col">
-                            @for($i = 0 ; $i < 5 ; $i++)
-                                <x-classroom.layouts.items.exercise/>
-                            @endfor
+                            <x-classroom.layouts.items.exercise :exercises='$exercises' :classroom="$classroom" />
+
                         </div>
                     </div>
                 </div>
@@ -61,7 +64,7 @@
                      aria-labelledby="everyone-tab">
                     <div class="xl:container xl:px-4 mx-auto">
                         <div class="flex flex-col">
-                            <x-classroom.layouts.items.members/>
+                            <x-classroom.layouts.items.members :classroom="$classroom"/>
                         </div>
                     </div>
                 </div>
