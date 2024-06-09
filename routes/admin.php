@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\ExerciseController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SalaryController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\UsersSubscribedController;
@@ -64,5 +65,12 @@ Route::group([
     Route::post('users_subscribed/update/{user_subscribed:id}', [UsersSubscribedController::class, "update"])->name('users-subscribed.update');
     Route::get('users_subscribed/delete/{user_subscribed:id}', [UsersSubscribedController::class, "delete"])->name('users-subscribed.delete');
     Route::get('users_subscribed/force-delete/{user_subscribed:id}', [UsersSubscribedController::class, "__forceDelete"])->name('users-subscribed.force-delete');
+
+    Route::get('orders', [OrderController::class, "index"])->name('orders.index');
+    Route::get('orders/get-table', [OrderController::class, "getTableOrder"])->name('orders.table');
+    Route::get('orders/edit/{order:id}', [OrderController::class, "edit"])->name('orders.edit');
+    Route::post('orders/update/{order:id}', [OrderController::class, "update"])->name('orders.update');
+    Route::get('orders/delete/{order:id}', [OrderController::class, "delete"])->name('orders.delete');
+    Route::delete('orders/force-delete/{order:id}', [OrderController::class, "__forceDelete"])->name('orders.force-delete');
 });
 

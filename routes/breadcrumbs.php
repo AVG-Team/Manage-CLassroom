@@ -79,14 +79,14 @@ Breadcrumbs::for('admin.users-subscribed.edit', function (BreadcrumbTrail $trail
     $trail->push('Chỉnh Sửa Học Viên', route('admin.users-subscribed.edit', $users));
 });
 
-// Trang Chủ > Quản Lý Hoá Đơn
+// Trang Chủ > Quản Lý Đơn Hàng
 Breadcrumbs::for('admin.orders', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home');
-    $trail->push('Quản Lý Hoá Đơn', route('admin.orders.index'));
+    $trail->push('Quản Lý Đơn Hàng', route('admin.orders.index'));
 });
 
-// Trang Chủ > Quản Lý Hoá Đơn > Chi Tiết Hoá Đơn
+// Trang Chủ > Quản Lý Đơn Hàng > Chi Tiết Đơn Hàng
 Breadcrumbs::for('admin.orders.edit', function (BreadcrumbTrail $trail, $order) {
     $trail->parent('admin.orders');
-    $trail->push('Xem Chi Tiết Hoá Đơn', route('admin.orders.edit', $order));
+    $trail->push('Xem Chi Tiết Đơn Hàng', route('admin.orders.edit', $order));
 });

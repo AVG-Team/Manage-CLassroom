@@ -88,20 +88,22 @@
                 </div>
             </li>
 
-            <li>
-                <a href="" class="hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200">
+            <li class="hs-accordion {{ Request::routeIs('admin.salary.*') ? 'active' : '' }} ">
+                <a href="#" class="hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200">
                     <svg class="size-5 mr-3 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                     </svg>
                     Quản Lý Lương
                 </a>
             </li>
-            <li><a class="flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="#">
+            <li class="hs-accordion {{ Request::routeIs('admin.orders.*') ? 'active' : '' }} ">
+                <a class="hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route("admin.orders.index") }}">
                     <svg class="size-5 ml-2 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
                     </svg>
-                    Quản Lý Thanh Toán
-                </a></li>
+                    Quản Lý Đơn Hàng
+                </a>
+            </li>
 
             <li><a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="#">
                     <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>

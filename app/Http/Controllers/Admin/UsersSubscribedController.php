@@ -281,7 +281,15 @@ class UsersSubscribedController extends Controller
     public function delete(UserSubscribed $userSubscribed)
     {
         try {
+            $classroomId = $userSubscribed->classroom_id;
             $userSubscribed->delete();
+
+            $count = UserSubscribed::query()->where('classroom_id', $classroomId)->count();
+            $classroom = Classroom::query()->where('id', $classroomId)->first();
+            if ($classroom->capacity > $count) {
+                $classroom->update(['status' => 0]);
+            }
+
             return redirect()->route('admin.users-subscribed.index')->with('success', 'Xóa Học Viên Đăng Kí Thành Công');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['errors' => 'Xóa người dùng thất bại']);

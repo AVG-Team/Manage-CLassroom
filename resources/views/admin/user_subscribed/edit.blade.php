@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="mb-4.5">
-                            <label for="description"
+                            <label for="note"
                                    class="mb-3 block text-sm font-medium text-black"
                             >
                                 Chú Thích Đơn <span class="text-meta-1">*</span>
