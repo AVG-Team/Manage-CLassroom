@@ -25,6 +25,9 @@
                 class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Môn
             </th>
             <th scope="col"
+                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Mã Lớp Học
+            </th>
+            <th scope="col"
                 class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Tình Trạng
             </th>
             <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
@@ -50,6 +53,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">{{ $userSubscribed->classroom->grade }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">{{ truncateString($userSubscribed->classroom->title) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">{{ $userSubscribed->classroom->subject()->first()->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">{{ $userSubscribed->classroom->code_classroom }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800">{{ \App\Enums\UsersSubscribedStatusEnum::getKeyByValue($userSubscribed->status) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium no-navigation">
                     <button type="button" onclick="location.href='{{ route('admin.users-subscribed.edit', $userSubscribed->id) }}'"

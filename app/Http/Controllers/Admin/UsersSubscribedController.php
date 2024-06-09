@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ClassroomStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserSubscribedRequest;
 use App\Http\Requests\UsersSubscribedRequest;
@@ -159,7 +160,7 @@ class UsersSubscribedController extends Controller
 
             $classroom = Classroom::query()->where('code_classroom', $values['code_classroom'])->first();
 
-            if (!$classroom || $classroom->status == 0) {
+            if (!$classroom || $classroom->status ==  ClassroomStatusEnum::CLOSE) {
                 return redirect()->back()->withErrors(['code_classroom' => 'Lớp học không tồn tại']);
             }
 
@@ -199,7 +200,7 @@ class UsersSubscribedController extends Controller
             return redirect()->route('admin.users-subscribed.index')->with('success', 'Thêm Học Viên Đăng Kí Thành Công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['errors' => 'Thêm người dùng thất bại']);
+            return redirect()->back()->withErrors(['errors' => 'Thêm học viên thất bại']);
         }
     }
 
@@ -215,6 +216,66 @@ class UsersSubscribedController extends Controller
             'userSubscribed' => $userSubscribed,
             'order' => $order,
         ]);
+    }
+
+    public function update(StoreUserSubscribedRequest $request ,UserSubscribed $userSubscribed)
+    {
+        try {
+            DB::beginTransaction();
+            $values = $request->validated();
+
+            $classroom = Classroom::query()->where('code_classroom', $values['code_classroom'])->first();
+
+            if (!$classroom || $classroom->status == ClassroomStatusEnum::CLOSE) {
+                return redirect()->back()->withErrors(['code_classroom' => 'Lớp học không tồn tại']);
+            }
+
+            $user = User::query()->where('uuid', $values['user_id'])->first();
+            if (!$user) {
+                return redirect()->back()->withErrors(['user_id' => 'Người dùng không tồn tại']);
+            }
+
+            $isExist = UserSubscribed::query()->where('user_id', $values['user_id'])->where('classroom_id', $classroom->id)->first();
+            if ($isExist && $isExist->id != $userSubscribed->id) {
+                return redirect()->back()->withErrors(['user_id' => 'Học viên đã đăng ký lớp học này', 'code_classroom' => 'Học viên đã đăng ký lớp học này']);
+            }
+
+            $order = Order::query()->where('user_id', $userSubscribed->user_id)->where('classroom_id', $userSubscribed->classroom_id)->first();
+
+            if (! $order) {
+                return redirect()->back()->withErrors(['errors' => 'Không tìm thấy đơn hàng của đơn đăng kí này, vui lòng liên hệ admin để sửa lại']);
+            }
+
+            $order->user_id = $values['user_id'];
+            $order->classroom_id = $classroom->id;
+            $order->note = $values['note'];
+
+            $isExistOrder = Order::query()->where('user_id', $values['user_id'])->where('classroom_id', $classroom->id)->first();
+            if ($isExistOrder && $isExistOrder->id != $order->id) {
+                return redirect()->back()->withErrors(['code_classroom' => 'Học viên đã mua lớp học này']);
+            }
+
+            $userSubscribed->update($values);
+            $order->update();
+
+            if ($userSubscribed->user_id != $values['user_id']) {
+                Mail::send('email.AddUserToClassroom', compact('user'), function ($email) use ($user) {
+                    $email->subject(config('app.name') . ' - Thêm Học Viên Thành Công');
+                    $email->to($user->email, $user->name);
+                });
+            }
+
+            $count = UserSubscribed::query()->where('classroom_id', $classroom->id)->count();
+            if ($classroom->capacity <= $count) {
+                $classroom->update(['status' => 1]);
+            }
+
+            DB::commit();
+            return redirect()->route('admin.users-subscribed.index')->with('success', 'Sửa Học Viên Đăng Kí Thành Công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['errors' => 'Sửa Học Viên Đăng Kí Thất Bại']);
+        }
     }
 
     public function delete(UserSubscribed $userSubscribed)

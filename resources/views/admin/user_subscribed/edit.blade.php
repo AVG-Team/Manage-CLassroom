@@ -28,7 +28,7 @@
                         Thông Tin Cá Nhân
                     </h3>
                 </div>
-                <form action="{{ route("admin.users-subscribed.store") }}" method="post">
+                <form action="{{ route("admin.users-subscribed.update", $userSubscribed) }}" method="post">
                     @csrf
                     <div class="p-6.5">
                         <div class="mb-4.5">
@@ -182,11 +182,11 @@
 
                         <div>
                             <x-user.form.buttons.primary type="submit"
-                                                         class="w-full justify-center font-medium p-3 rounded">Sửa Học Viên
+                                                         class="w-full justify-center font-medium p-3 rounded">Sửa Học Viên Đăng Kí
                             </x-user.form.buttons.primary>
 
                             <x-user.form.buttons.danger type="button" onclick="location.href='{{ route('admin.users-subscribed.delete', $userSubscribed->id) }}'"
-                                                         class="w-full justify-center font-medium p-3 rounded mt-5">Xoá Học Viên
+                                                         class="w-full justify-center font-medium p-3 rounded mt-5">Xoá Học Viên Đăng Kí
                             </x-user.form.buttons.danger>
                         </div>
                     </div>
