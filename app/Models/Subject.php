@@ -14,5 +14,14 @@ class Subject extends Model
         'name',
     ];
 
+    protected $appends = [
+        'countClassroomSubscribed',
+    ];
+
     public $timestamps = true;
+
+    public function getCountClassroomSubscribedAttribute()
+    {
+        return Classroom::query()->where('subject_id', $this->id)->count();
+    }
 }

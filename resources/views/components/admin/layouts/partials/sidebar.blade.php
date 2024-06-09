@@ -54,7 +54,7 @@
                 </div>
             </li>
 
-            <li class="hs-accordion {{ Request::routeIs('admin.classrooms.*') || Request::routeIs('admin.exercises.*') || Request::routeIs('admin.users-subscribed.*') ? 'active' : '' }}" id="class-manage">
+            <li class="hs-accordion {{ Request::routeIs('admin.classrooms.*') || Request::routeIs('admin.exercises.*') || Request::routeIs('admin.users-subscribed.*') || Request::routeIs('admin.subject.*') ? 'active' : '' }}" id="class-manage">
                 <button type="button" class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200">
                     <svg class="size-5 ml-2 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
@@ -67,7 +67,7 @@
                     <svg class="hs-accordion-active:hidden ml-9 block size-4 text-gray-600 group-hover:text-gray-500 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
 
-                <div id="class-manage" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ Request::routeIs('admin.classrooms.*') || Request::routeIs('admin.exercises.*') || Request::routeIs('admin.users-subscribed.*') ? '' : 'hidden' }}">
+                <div id="class-manage" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ Request::routeIs('admin.classrooms.*') || Request::routeIs('admin.exercises.*') || Request::routeIs('admin.users-subscribed.*') || Request::routeIs('admin.subject.*') ? '' : 'hidden' }}">
                     <ul class="pt-2 ps-2">
                         <li class="hs-accordion {{ Request::routeIs('admin.classrooms.*') ? 'active' : '' }}">
                             <a class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route('admin.classrooms.index') }}">
@@ -84,17 +84,44 @@
                                 Quản Lý Học Sinh Của Lớp Học
                             </a>
                         </li>
+
+                        <li class="hs-accordion {{ Request::routeIs('admin.subject.*') ? 'active' : '' }}">
+                            <a class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route('admin.subject.index') }}">
+                                Quản Lý Môn Học
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
 
-            <li class="hs-accordion {{ Request::routeIs('admin.salary.*') ? 'active' : '' }} ">
-                <a href="#" class="hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200">
+
+            <li class="hs-accordion {{ Request::routeIs('admin.salaries.*') || Request::routeIs('admin.default-salary.*') ? 'active' : '' }}" id="salary-manage">
+                <button type="button" class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200">
                     <svg class="size-5 mr-3 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                     </svg>
+
                     Quản Lý Lương
-                </a>
+
+                    <svg class="hs-accordion-active:block ml-9 hidden size-4 text-gray-600 group-hover:text-gray-500 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+
+                    <svg class="hs-accordion-active:hidden ml-9 block size-4 text-gray-600 group-hover:text-gray-500 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+
+                <div id="class-manage" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ Request::routeIs('admin.salaries.*') || Request::routeIs('admin.default-salary.*') ? '' : 'hidden' }}">
+                    <ul class="pt-2 ps-2">
+                        <li class="hs-accordion {{ Request::routeIs('admin.salaries.*') ? 'active' : '' }}">
+                            <a class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route('admin.salaries.index') }}">
+                                Quản Lý Lương
+                            </a>
+                        </li>
+                        <li class="hs-accordion {{ Request::routeIs('admin.default-salary.*') ? 'active' : '' }}">
+                            <a class="hs-accordion-toggle hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route('admin.default-salary.index') }}">
+                                Quản Lý Lương Cơ bản
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="hs-accordion {{ Request::routeIs('admin.orders.*') ? 'active' : '' }} ">
                 <a class="hs-accordion-active:text-secondary hs-accordion-active:hover:bg-transparent hs-accordion-active:font-medium w-full text-start flex items-center py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-200" href="{{ route("admin.orders.index") }}">
