@@ -72,3 +72,21 @@ Breadcrumbs::for('admin.users-subscribed.create', function (BreadcrumbTrail $tra
     $trail->parent('admin.users-subscribed');
     $trail->push('Thêm Học Viên', route('admin.users-subscribed.create'));
 });
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký > Chỉnh Sửa Học Viên
+Breadcrumbs::for('admin.users-subscribed.edit', function (BreadcrumbTrail $trail, $users) {
+    $trail->parent('admin.users-subscribed');
+    $trail->push('Chỉnh Sửa Học Viên', route('admin.users-subscribed.edit', $users));
+});
+
+// Trang Chủ > Quản Lý Hoá Đơn
+Breadcrumbs::for('admin.orders', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Quản Lý Hoá Đơn', route('admin.orders.index'));
+});
+
+// Trang Chủ > Quản Lý Hoá Đơn > Chi Tiết Hoá Đơn
+Breadcrumbs::for('admin.orders.edit', function (BreadcrumbTrail $trail, $order) {
+    $trail->parent('admin.orders');
+    $trail->push('Xem Chi Tiết Hoá Đơn', route('admin.orders.edit', $order));
+});

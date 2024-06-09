@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ClassroomStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserSubscribedRequest;
-use App\Http\Requests\UsersSubscribedRequest;
+use App\Http\Requests\Admin\UserSubscribed\StoreUserSubscribedRequest;
+use App\Http\Requests\Admin\UserSubscribed\UsersSubscribedRequest;
 use App\Models\Classroom;
 use App\Models\Order;
 use App\Models\User;

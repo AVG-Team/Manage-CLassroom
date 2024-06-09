@@ -13,7 +13,7 @@
     @section('title', $title)
     @section('title-content', $contentTitle)
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('admin.users-subscribed.create') }}
+        {{ Breadcrumbs::render('admin.users-subscribed.edit', $userSubscribed->id) }}
     @endsection
     <div>
         <div class="flex flex-col gap-9">
@@ -56,7 +56,8 @@
                                                 <path d="m21 21-4.3-4.3"></path>
                                             </svg>
                                         </div>
-                                        <input id="hs-combo-box-hidden" name="user_id" type="text" value="{{ old('user_id')?: $userSubscribed->user_id }}"
+                                        <input id="hs-combo-box-hidden" name="user_id" type="text"
+                                               value="{{ old('user_id')?: $userSubscribed->user_id }}"
                                                data-hs-combo-box-input=""
                                                class="py-3 ps-10 pe-4 block w-full border-solid border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                                placeholder="Nhập Tên Giáo Viên">
@@ -100,7 +101,8 @@
                                                 <path d="m21 21-4.3-4.3"></path>
                                             </svg>
                                         </div>
-                                        <input id="hs-combo-box-hidden" name="code_classroom" type="text" value="{{ old('code_classroom')?: $userSubscribed->classroom()->first()->code_classroom }}"
+                                        <input id="hs-combo-box-hidden" name="code_classroom" type="text"
+                                               value="{{ old('code_classroom')?: $userSubscribed->classroom()->first()->code_classroom }}"
                                                data-hs-combo-box-input=""
                                                class="py-3 ps-10 pe-4 block w-full border-solid border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                                placeholder="Nhập Tiêu Đề Lớp Bạn">
@@ -182,11 +184,14 @@
 
                         <div>
                             <x-user.form.buttons.primary type="submit"
-                                                         class="w-full justify-center font-medium p-3 rounded">Sửa Học Viên Đăng Kí
+                                                         class="w-full justify-center font-medium p-3 rounded">Sửa Học
+                                Viên Đăng Kí
                             </x-user.form.buttons.primary>
 
-                            <x-user.form.buttons.danger type="button" onclick="location.href='{{ route('admin.users-subscribed.delete', $userSubscribed->id) }}'"
-                                                         class="w-full justify-center font-medium p-3 rounded mt-5">Xoá Học Viên Đăng Kí
+                            <x-user.form.buttons.danger type="button"
+                                                        onclick="location.href='{{ route('admin.users-subscribed.delete', $userSubscribed->id) }}'"
+                                                        class="w-full justify-center font-medium p-3 rounded mt-5">Xoá
+                                Học Viên Đăng Kí
                             </x-user.form.buttons.danger>
                         </div>
                     </div>

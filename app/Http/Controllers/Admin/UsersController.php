@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Users\ManageUsersRequest;
 use App\Http\Requests\Admin\Users\StoreUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUsersRequest;
-use App\Http\Requests\ManageUsersRequest;
 use App\Models\PasswordResetToken;
 use App\Models\User;
 use App\Traits\ResponseTrait;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsersSubscribedRequest extends FormRequest
+class ManageUsersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class UsersSubscribedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['nullable', 'integer', 'min:1'],
-            'type' => ['nullable', 'integer', 'min:0', 'max:2'],
-            'status' => ['nullable', 'integer', 'min:-1', 'max:1'],
-            'search' => ['nullable', 'string', 'max:255'],
+            'page' => ["nullable", "integer"],
+            'per_page' => ["nullable", "integer"],
+            'filter_type' => ["nullable", "string"],
+            'search' => ["nullable", "string"],
         ];
     }
 }
