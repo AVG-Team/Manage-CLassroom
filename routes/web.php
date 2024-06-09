@@ -49,18 +49,22 @@ Route::group([
     Route::post("profile", [ProfileController::class, "process"])->name("profile.process");
     Route::get('/checkout/{classroom}', [PaymentController::class, "checkout"])->name('checkout');
     Route::post('/checkout/success', [PaymentController::class, "success"])->name('checkout.success');
+    Route::get('/classroom/ex/{exercise}', [ExerciseController::class, "index"])->name('exercise');
+    Route::get('/classroom', [ClassroomController::class, "index"])->name('classroom');
+    Route::get('/classroom/participate', [ClassroomController::class, "participate"])->name('participate');
+    Route::get('/classroom/detail/{classroom}', [ClassroomController::class, "detail"])->name('classroom.detail');
+    Route::post('/classroom/detail/{classroom}/exercise', [ExerciseController::class, "store"])->name('exercise.store');
+    Route::patch('/classroom/ex/{exercise}', [ExerciseController::class, 'update'])->name('exercise.update');
+    Route::post('/classroom/detail/{classroom}', [NotificationController::class, "store"])->name('notification.store');
+    Route::get('/classroom/all-exercises', [ExerciseController::class, "showAll"])->name('all-exercises');
+    Route::get('/list-classroom', [ClassroomController::class, "showAll"])->name('list-classroom');
 });
-Route::get('/classroom', [ClassroomController::class, "index"])->name('classroom');
-Route::get('/classroom/participate', [ClassroomController::class, "participate"])->name('participate');
-Route::get('/classroom/detail/{classroom}', [ClassroomController::class, "detail"])->name('classroom.detail');
+
 
 //test
 Route::get('/test', [TestController::class, "__invoke"])->name('test');
 
-Route::get('/classroom/ex/{exercise}', [ExerciseController::class, "index"])->name('exercise');
-Route::get('/list-classroom', [ClassroomController::class, "showAll"])->name('list-classroom');
-Route::post('/classroom/detail/{classroom}/exercise', [ExerciseController::class, "store"])->name('exercise.store');
-Route::patch('/classroom/ex/{exercise}', [ExerciseController::class, 'update'])->name('exercise.update');
-Route::post('/classroom/detail/{classroom}', [NotificationController::class, "store"])->name('notification.store');
-Route::get('/classroom/all-exercises', [ExerciseController::class, "showAll"])->name('all-exercises');
+
+
+
 

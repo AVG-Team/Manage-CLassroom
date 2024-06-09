@@ -5,7 +5,7 @@
     <!-- end banner -->
 
     @if(auth()->user())
-    <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+    <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 mt-94 xl:mt-20 xxl:mt-80">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <div class="mx-auto max-w-5xl">
                 <h2 class="text-xl font-semibold text-blue-600 sm:text-2xl">Thanh Toán</h2>
