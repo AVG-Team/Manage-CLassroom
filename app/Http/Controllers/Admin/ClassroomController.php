@@ -137,11 +137,17 @@ class ClassroomController extends Controller
 
         $values['image_path'] = $path;
 
+        $countClassroom = Classroom::all()->count();
+        if($countClassroom > 18)
+        {
+            return redirect()->back()->with(['errors' => 'Số lớp học đã đạt tối đa, vui lòng đóng các lớp học không cần thiết trước khi tạo mới lớp học']);
+        }
+
         try {
             Classroom::create($values);
             return redirect()->route('classrooms.index')->with('success', 'Thêm lớp học thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Thêm lớp học thất bại');
+            return redirect()->back()->with(['errors' => 'Thêm lớp học thất bại']);
         }
     }
 
