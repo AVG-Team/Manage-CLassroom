@@ -11,6 +11,7 @@ class Exercise extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $table = 'exercises';
     protected $fillable = [
         'title',
         'description',

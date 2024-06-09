@@ -7,6 +7,7 @@ use App\Enums\UserRoleEnum;
 use App\Traits\FullTextSearch;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\BelongsToManyRelationship;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -89,12 +90,12 @@ class User extends Authenticatable
 
     public function exercises(): HasMany
     {
-        return $this->hasMany(Exercise::class);
+        return $this->hasMany(Exercise::class,"user_id");
     }
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class,'user_id');
     }
 
     public function salaries(): HasMany
@@ -113,4 +114,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Classroom::class, 'teacher_id', 'uuid');
     }
+
 }

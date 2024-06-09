@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\FullTextSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Classroom extends Model
 {
-    use HasFactory, softDeletes, FullTextSearch;
+    use HasFactory, softDeletes;
 
     protected $fillable = [
         'title',
@@ -31,6 +30,11 @@ class Classroom extends Model
     protected $searchable = [
         'title',
     ];
+
+    public function exercises(): HasMany
+    {
+        return $this->hasMany(Exercise::class);
+    }
 
     public function users(): BelongsToMany
     {

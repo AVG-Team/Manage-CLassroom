@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exercise;
 use Illuminate\Http\Request;
 use App\Models\Classroom;
+use App\Models\Execrise;
+use App\Models\UserSubscribed;
+use App\Models\Notification;
 use App\Http\Requests\StoreClassroomRequest;
+
 
 
 class ClassroomController extends Controller
@@ -23,6 +28,14 @@ class ClassroomController extends Controller
         return view('user.classroom.create', ['title' => $title]);
     }
 
+    public function showAll(){
+        $classrooms = Classroom::all();
+        $user = auth()->user();
+        $userSubscribed = UserSubscribed::all()->where('user_id', $user->uuid)->where('status', 0);
+        $title = "Danh sách lớp học";
+        return view('user.page.list-course', ['title' => $title], compact('classrooms', 'user', 'userSubscribed'));
+    }
+
     public function participate()
     {
         $title = "Participate Classroom";
@@ -33,22 +46,19 @@ class ClassroomController extends Controller
 
     public function detail($id){
         $title = "Detail Classroom";
-        $classroom = Classroom::findOrFail($id);
+        $classrooms = Classroom::all();
+        $notifications = Notification::where('classroom_id', $id)->get();
         $user = auth()->user();
-        return view('user.classroom.detail', ['title' => $title], compact('classroom', 'user'));
+
+        $exercises = Exercise::all()->where('classroom_id', $id);
+
+        $classroom = $user->classrooms()->where('classroom_id', $id)->first();
+        if($user->role == 0){
+            $classroom = $user->classrooms()->where('classroom_id', $id)->first();
+        }
+        if($user->role == 1){
+           $classroom = $user->teacherClassrooms()->where('id', $id)->first();
+        }
+        return view('user.classroom.detailClassroom', ['title' => $title], compact('classroom','classrooms','user','exercises','notifications'));
     }
-
-    // public function store(StoreClassroomRequest $request){
-    //     $classroom = Classroom::create([
-    //         'title' => $request->title,
-    //         'description' => $request->description,
-    //         'code_classroom' => $request->code_classroom,
-    //         'image_path' => $request->image_path,
-    //         'status' => $request->status,
-    //         'price' => $request->price,
-    //         'category_id' => $request->category_id,
-    //     ])
-
-    //     return redirect()->route("classroom");
-    // }
 }
