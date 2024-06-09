@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Classroom;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ManageUsersRequest extends FormRequest
+class ManageClassroomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,12 @@ class ManageUsersRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => ["nullable", "integer"],
-            'per_page' => ["nullable", "integer"],
-            'filter_type' => ["nullable", "string"],
-            'search' => ["nullable", "string"],
+            'per_page' => ['nullable', 'integer', 'min:1'],
+            'status' => ['nullable', 'integer', 'min:-1'],
+            'search_type' => ['nullable', 'integer', 'in:-1,0,1,2'],
+            'search' => ['nullable', 'string'],
+            'grade' => ['nullable', 'integer', 'min:-1', 'max:12'],
+            'subject' => ['nullable', 'integer', 'min:-1'],
         ];
     }
 }

@@ -16,8 +16,8 @@ final class SalaryStatusEnum extends Enum
     public static function getArrayView(): array
     {
         return [
-            'Error' => self::PENDING,
-            'Success' => self::APPROVE,
+            'Đang Chờ' => self::PENDING,
+            'Đã Thanh Toán' => self::APPROVE,
         ];
     }
 

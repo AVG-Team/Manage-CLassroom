@@ -16,8 +16,8 @@ final class NotifyStatusEnum extends Enum
     public static function getArrayView(): array
     {
         return [
-            'Reject' => self::REJECT,
-            'Approve' => self::APPROVE,
+            'Từ Chối' => self::REJECT,
+            'Chấp Nhận' => self::APPROVE,
         ];
     }
 

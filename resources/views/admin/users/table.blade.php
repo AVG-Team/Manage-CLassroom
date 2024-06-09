@@ -25,7 +25,7 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
         @foreach($users as $user)
-            <tr onclick="location.href='{{ route('admin.users.edit', $user->uuid) }}'" class="cursor-pointer">
+            <tr onclick="if (!event.target.closest('button')) { location.href='{{ route('admin.exercises.edit', $user->uuid) }}' }" class="cursor-pointer">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ $user->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $user->age }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $user->address }}</td>
@@ -46,6 +46,6 @@
         </tbody>
     </table>
 </div>
-<div class="py-1 px-4">
+<div class="py-1 px-4" id="pagination">
     {{ $users->links() }}
 </div>

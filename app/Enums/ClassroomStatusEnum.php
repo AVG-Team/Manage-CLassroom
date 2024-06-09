@@ -7,17 +7,20 @@ use BenSampo\Enum\Enum;
 /**
  * @method static static PENDING()
  * @method static static ACTIVE()
+ * @method static static CLOSE()
  */
 final class ClassroomStatusEnum extends Enum
 {
     public const PENDING = 0;
     public const ACTIVE = 1;
+    public const CLOSE = 2;
 
     public static function getArrayView(): array
     {
         return [
-            'Pending' => self::PENDING,
-            'Approve' => self::ACTIVE,
+            'Chờ Duyệt' => self::PENDING,
+            'Đã Hoạt Động' => self::ACTIVE,
+            'Đóng Lớp' => self::CLOSE,
         ];
     }
 

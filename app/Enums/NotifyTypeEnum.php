@@ -18,9 +18,9 @@ final class NotifyTypeEnum extends Enum
     public static function getArrayView(): array
     {
         return [
-            'Warning' => self::WARNING,
-            'Error' => self::ERROR,
-            'Success' => self::SUCCESS,
+            'Cảnh Báo' => self::WARNING,
+            'Báo Lỗi' => self::ERROR,
+            'Thành Công' => self::SUCCESS,
         ];
     }
 

@@ -42,3 +42,51 @@ Breadcrumbs::for('admin.exercises.edit', function (BreadcrumbTrail $trail, $exer
     $trail->parent('admin.exercises');
     $trail->push('Xem Bài Tập', route('admin.exercises.edit', $exercise));
 });
+
+// Trang chủ > Quản Lý Lớp Học
+Breadcrumbs::for('admin.classrooms', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Quản Lý Lớp Học', route('admin.classrooms.index'));
+});
+
+// Trang Chủ > Quản Lý Lớp Học > Thêm Lớp Học
+Breadcrumbs::for('admin.classrooms.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.classrooms');
+    $trail->push('Thêm Lớp học', route('admin.classrooms.create'));
+});
+
+// Trang Chủ > Quản Lý Lớp Học > Chỉnh Sửa Lớp Học
+Breadcrumbs::for('admin.classrooms.edit', function (BreadcrumbTrail $trail, $classroom) {
+    $trail->parent('admin.classrooms');
+    $trail->push('Chỉnh Sửa Lớp Học', route('admin.classrooms.edit', $classroom));
+});
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký
+Breadcrumbs::for('admin.users-subscribed', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Danh Sách Học Viên Đã Đăng Ký', route('admin.users-subscribed.index'));
+});
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký > Thêm Học Viên
+Breadcrumbs::for('admin.users-subscribed.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.users-subscribed');
+    $trail->push('Thêm Học Viên', route('admin.users-subscribed.create'));
+});
+
+// Trang chủ > Danh Sách Học Viên Đã Đăng Ký > Chỉnh Sửa Học Viên
+Breadcrumbs::for('admin.users-subscribed.edit', function (BreadcrumbTrail $trail, $users) {
+    $trail->parent('admin.users-subscribed');
+    $trail->push('Chỉnh Sửa Học Viên', route('admin.users-subscribed.edit', $users));
+});
+
+// Trang Chủ > Quản Lý Đơn Hàng
+Breadcrumbs::for('admin.orders', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Quản Lý Đơn Hàng', route('admin.orders.index'));
+});
+
+// Trang Chủ > Quản Lý Đơn Hàng > Chi Tiết Đơn Hàng
+Breadcrumbs::for('admin.orders.edit', function (BreadcrumbTrail $trail, $order) {
+    $trail->parent('admin.orders');
+    $trail->push('Xem Chi Tiết Đơn Hàng', route('admin.orders.edit', $order));
+});

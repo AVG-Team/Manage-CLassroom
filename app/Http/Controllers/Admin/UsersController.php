@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Users\ManageUsersRequest;
 use App\Http\Requests\Admin\Users\StoreUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUsersRequest;
-use App\Http\Requests\ManageUsersRequest;
 use App\Models\PasswordResetToken;
 use App\Models\User;
 use App\Traits\ResponseTrait;
@@ -59,7 +59,7 @@ class UsersController extends Controller
             $query->where('role', $type);
         }
 
-        $users = $query->paginate($perPage);
+        $users = $query->paginate($perPage)->appends($request->all());
 
         if ($request->ajax()) {
             return response()->json([
@@ -70,6 +70,18 @@ class UsersController extends Controller
         return view('admin.users.table', [
             'users' => $users,
         ]);
+    }
+
+    public function getTeacher()
+    {
+        $teachers = User::Where('role', UserRoleEnum::TEACHER)->get();
+        return response()->json($teachers);
+    }
+
+    public function getStudent()
+    {
+        $teachers = User::Where('role', UserRoleEnum::USER)->get();
+        return response()->json($teachers);
     }
 
     public function create()
@@ -108,7 +120,7 @@ class UsersController extends Controller
             ]);
 
             Mail::send('email.create-user-from-admin', compact('user', 'token', 'password'), function ($email) use ($user) {
-                $email->subject('Manage Events - Create Account Successfully');
+                $email->subject(config('app.name') . '- Tạo Tài Khoản Thành Công');
                 $email->to($user->email, $user->name);
             });
 
@@ -144,7 +156,7 @@ class UsersController extends Controller
             $values = $request->validated();
 
             $email = $values['email'];
-            $userTmp = User::where('email' , $email)->first();
+            $userTmp = User::where('email', $email)->first();
 
             if ($userTmp && $userTmp->uuid != $user->uuid) {
                 return redirect()->back()->withErrors(['errors' => 'Email đã tồn tại']);

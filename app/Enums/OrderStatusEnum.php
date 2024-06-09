@@ -6,18 +6,18 @@ use BenSampo\Enum\Enum;
 
 /**
  * @method static static PENDING()
- * @method static static APPROVE()
+ * @method static static ACTIVE()
  */
-final class ClassroomDetailStatusEnum extends Enum
+final class OrderStatusEnum extends Enum
 {
     public const PENDING = 0;
-    public const APPROVE = 1;
+    public const ACTIVE = 1;
 
     public static function getArrayView(): array
     {
         return [
-            'Pending' => self::PENDING,
-            'Approve' => self::APPROVE,
+            'Chờ Duyệt' => self::PENDING,
+            'Đã Thanh Toán' => self::ACTIVE,
         ];
     }
 
