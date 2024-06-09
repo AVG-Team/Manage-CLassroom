@@ -96,17 +96,68 @@
     </div>
     @push('scripts')
         <script>
-            function fetchData() {
-                console.log(document.getElementById('search').value)
+            let page = 1;
+            function attachDeleteEventListeners() {
+                let deleteButtons = document.querySelectorAll('.btn-delete');
+                deleteButtons.forEach((button) => {
+
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const id = e.target.getAttribute('data-id');
+                        const url = '{{ route('admin.users.delete', ':id') }}'.replace(':id', id);
+                        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                        axios.delete(url, {
+                            headers: {
+                                'X-CSRF-TOKEN': token
+                            }
+                        })
+                            .then(response => {
+                                console.log(response);
+                                if (response.data.success) {
+                                    fetchData(page);
+                                    Toastify({
+                                        text: response.data.message,
+                                        duration: 1000,
+                                        close: true,
+                                        gravity: "top", // `top` or `bottom`
+                                        position: "right", // `left`, `center` or `right`
+                                        style: {
+                                            background: "#19B9A8",
+                                            borderRadius: "0.7rem",
+                                        },
+                                    }).showToast();
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                Toastify({
+                                    text: error.response.data.message,
+                                    duration: 1000,
+                                    close: true,
+                                    gravity: "top", // `top` or `bottom`
+                                    position: "right", // `left`, `center` or `right`
+                                    style: {
+                                        background: "#EF4444",
+                                        borderRadius: "0.7rem",
+                                    },
+                                }).showToast();
+                                console.error('Error deleting user:', error);
+                            });
+                    });
+                });
+            }
+            function fetchData(page = 1) {
                 axios.get('{{ route('admin.users.table') }}', {
                     params: {
                         per_page: document.getElementsByName('per_page')[0].value,
+                        page: page,
                         filter_type: document.querySelector('input[name="filter_type"]:checked').value,
                         search: document.getElementById('search').value
                     }
                 })
                     .then(response => {
                         document.getElementById('table').innerHTML = response.data.html;
+                        attachDeleteEventListeners();
                     })
                     .catch(error => console.error('Error fetching user data:', error));
             }
@@ -131,54 +182,29 @@
 
             // delete
             document.addEventListener('DOMContentLoaded', () => {
-                const deleteButtons = document.querySelectorAll('.btn-delete');
-                deleteButtons.forEach((button) => {
-                    button.addEventListener('click', (e) => {
+                attachDeleteEventListeners();
+                document.getElementById('pagination').addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
                         e.preventDefault();
-                        const id = e.target.getAttribute('data-id');
-                        const url = '{{ route('admin.users.delete', ':id') }}'.replace(':id', id);
-                        console.log(url);
-                        console.log(id);
-                        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                        axios.delete(url, {
-                            headers: {
-                                'X-CSRF-TOKEN': token
-                            }
-                        })
-                            .then(response => {
-                                console.log(response);
-                                if (response.data.success) {
-                                    fetchData();
-                                    Toastify({
-                                        text: response.data.message,
-                                        duration: 1000,
-                                        close: true,
-                                        gravity: "top", // `top` or `bottom`
-                                        position: "right", // `left`, `center` or `right`
-                                        style: {
-                                            background: "#19B9A8",
-                                            borderRadius: "0.7rem",
-                                        },
-                                    }).showToast();
-                                }
-                            })
-                            .catch(error => {
-                                Toastify({
-                                    text: 'Xóa người dùng thất bại',
-                                    duration: 1000,
-                                    close: true,
-                                    gravity: "top", // `top` or `bottom`
-                                    position: "right", // `left`, `center` or `right`
-                                    style: {
-                                        background: "#EF4444",
-                                        borderRadius: "0.7rem",
-                                    },
-                                }).showToast();
-                                console.error('Error deleting user:', error);
-                            });
-                    });
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
                 });
             })
+
+            const table = document.getElementById('table');
+            const observer = new MutationObserver(function(mutationsList, observer) {
+                console.log('Table changed');
+                document.getElementById('pagination').addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        page = new URL(e.target.href).searchParams.get('page');
+                        fetchData(page);
+                    }
+                });
+            });
+
+            observer.observe(table, { childList: true, subtree: true });
         </script>
     @endpush
 </x-admin.layouts.app>

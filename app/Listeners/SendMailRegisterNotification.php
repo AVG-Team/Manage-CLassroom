@@ -26,7 +26,7 @@ class SendMailRegisterNotification implements ShouldQueue
         $token = $event->token;
 
         Mail::send('email.register', compact('user', 'token'), function ($email) use ($user) {
-            $email->subject('Manage Events - Create Account Successfully');
+            $email->subject(config('app.name') . '- Đăng ký tài khoản thành công');
             $email->to($user->email, $user->name);
         });
     }

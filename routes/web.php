@@ -8,6 +8,7 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use App\Http\Middleware\CheckAnonymousMiddleware;
 use App\Http\Middleware\CheckLoginMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,6 @@ Route::group([
 Route::get('/classroom', [ClassroomController::class, "index"])->name('classroom');
 Route::get('/classroom/participate', [ClassroomController::class, "participate"])->name('participate');
 Route::get('/classroom/detail/{classroom}', [ClassroomController::class, "detail"])->name('classroom.detail');
+
+//test
+Route::get('/test', [TestController::class, "__invoke"])->name('test');

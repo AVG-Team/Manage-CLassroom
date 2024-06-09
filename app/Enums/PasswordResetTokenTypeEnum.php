@@ -16,8 +16,8 @@ final class PasswordResetTokenTypeEnum extends Enum
     public static function getArrayView(): array
     {
         return [
-            'Password Rest' => self::PASSWORDRESET,
-            'Email Verify' => self::EMAILVERIFY,
+            'Khôi Phục Mật Khẩu' => self::PASSWORDRESET,
+            'Xác Nhận Email' => self::EMAILVERIFY,
         ];
     }
 
