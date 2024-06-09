@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExerciseRequest;
 use App\Models\Classroom;
 use App\Models\Exercise;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -25,13 +26,14 @@ class ExerciseController extends Controller
         $user = auth()->user();
         $classrooms = Classroom::all();
 
-        return view('user.page.all-exercises', ['title' => $title], compact('exercises','classrooms','user'));
+        return view('user.page.all-exercises', ['title' => $title], compact('classrooms','user'));
     }
 
 
     public function store(Request $request)
     {
 
+        $user = auth()->user();
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -55,6 +57,16 @@ class ExerciseController extends Controller
         }
 
         $exercise->save();
+
+        $notification = new Notification();
+        $notification->title = 'Thông báo bài tập mới';
+        $notification->content = $user->name . ' đã đăng một bài tập mới: Ngày ' . $exercise->created_at->format('d/m');
+        $notification->user_id = auth()->user()->uuid;
+        $notification->classroom_id = $request->classroom_id;
+        $notification->type = 2;
+
+        // Lưu thông báo vào cơ sở dữ liệu
+        $notification->save();
 
         return redirect()->route('exercise', ['exercise' => $exercise->id ])->with('success', 'Tạo bài tập thành công.');
     }

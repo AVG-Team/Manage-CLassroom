@@ -54,7 +54,7 @@
                                         C
                                     </div>
                                 </div>
-                                <span class="ms-3">{{ $class->title }}</span>
+                                <span class="ms-3">{{ $class->title}} {{ $class->grade }} </span>
                             </a>
                         </li>
                         @endforeach
@@ -102,7 +102,7 @@
                                         C
                                     </div>
                                 </div>
-                                <span class="ms-3">{{ $class->title}}</span>
+                                <span class="ms-3">{{ $class->title}} {{ $class->grade }} </span>
                             </a>
                         </li>
                         @endforeach

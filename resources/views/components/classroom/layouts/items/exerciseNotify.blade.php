@@ -1,3 +1,6 @@
+@props(['notifications'])
+@foreach($notifications as $notification)
+@if($notification->type == 2)
 <div class="h-auto mb-2 border rounded-xl">
     <a href="#"
        class="flex items-center w-full p-4 bg-white shadow-md rounded-xl hover:text-blue-400 hover:bg-gray-100">
@@ -10,8 +13,10 @@
             </div>
         </div>
         <div class="items-start flex-1 ml-4">
-            <p class="text-sm text-gray-700">Nguyễn Thanh Tùng đã đăng một bài tập mới: Ngày 4/6</p>
-            <p class="text-xs text-gray-500">4 thg 6 (Đã chỉnh sửa 4 thg 6)</p>
+            <p class="text-sm text-gray-700">{{ $notification->content }}</p>
+            <p class="text-xs text-gray-500">{{ $notification->created_at->format('d') }} thg {{ $notification->created_at->format('m') }}</p>
         </div>
     </a>
 </div>
+@endif
+@endforeach

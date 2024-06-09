@@ -51,7 +51,7 @@
                                               d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                     </svg>
                                     <span
-                                        class="text-gray-600 font-medium truncate max-w-[7.5rem]">{{ auth()->user()->name ?? "Anonymous" }}</span>
+                                        class="text-gray-600 font-medium truncate xl:max-w-[12rem] max-w-[9rem]">{{ auth()->user()->name ?? "Anonymous" }}</span>
                                     <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg"
                                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -94,7 +94,7 @@
                                           d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                 </svg>
                                 <span
-                                    class="text-gray-600 font-medium truncate max-w-[7.5rem]">{{ auth()->user()->name ?? "Anonymous" }}</span>
+                                    class="text-gray-600 font-medium truncate xl:max-w-[12rem] max-w-[9rem]">{{ auth()->user()->name ?? "Anonymous" }}</span>
                             </div>
                             <div
                                 class="mt-2 space-y-2 font-normal">
@@ -142,18 +142,18 @@
                                     </a>
 
                                     <ul class="space-y-2 font-normal ">
-                                        @foreach(auth()->user()->classrooms as $class)
+                                        @foreach(auth()->user()->teacherClassrooms as $class)
                                         <li>
                                             <a href="{{ route('classroom.detail', $class->id) }}"
                                                class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                                                 <div
-                                                    class=" w-[2rem] h-[2rem] overflow-hidden border-2 border-white rounded-full  bg-[#FFF9D0]">
+                                                    class=" w-[2rem] h-[2rem] overflow-hidden border-2 border-white rounded-full  bg-[#03AED2]">
                                                     <div
-                                                        class=" inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
-                                                        N
+                                                        class=" inset-0 flex items-center justify-center text-xl font-bold text-[#FDDE55]">
+                                                        C
                                                     </div>
                                                 </div>
-                                                <span class="ms-3">{{ $class->title }}</span>
+                                                <span class="ms-3">{{ $class->title}} {{ $class->grade }} </span>
                                             </a>
                                         </li>
                                         @endforeach
@@ -179,13 +179,13 @@
                                             <a href="{{ route('classroom.detail', $class->id) }}"
                                                class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                                                 <div
-                                                    class=" w-[2rem] h-[2rem] overflow-hidden border-2 border-white rounded-full  bg-[#FFF9D0]">
+                                                    class=" w-[2rem] h-[2rem] overflow-hidden border-2 border-white rounded-full  bg-[#03AED2]">
                                                     <div
-                                                        class=" inset-0 flex items-center justify-center text-xl font-bold text-[#5AB2FF]">
-                                                        N
+                                                        class=" inset-0 flex items-center justify-center text-xl font-bold text-[#FDDE55]">
+                                                        C
                                                     </div>
                                                 </div>
-                                                <span class="ms-3">{{ $class->title }}</span>
+                                                <span class="ms-3">{{ $class->title}} {{ $class->grade }} </span>
                                             </a>
                                         </li>
                                         @endforeach
