@@ -132,7 +132,7 @@ class SalaryController extends Controller
 
         try {
             Salary::create($values);
-            return redirect()->route('admin.salary.index')->with('success', 'Thêm lương thành công');
+            return redirect()->route('admin.salaries.index')->with('success', 'Thêm lương thành công');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Thêm lương thất bại');
         }

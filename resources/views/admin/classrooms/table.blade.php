@@ -34,16 +34,6 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->teacher == null ? "Chưa có" : $classroom->teacher->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->subject->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $classroom->grade }}</td>
-                @if(\App\Enums\ClassroomStatusEnum::PENDING == $classroom->status)
-                    <td class="border-b border-[#eee] px-4 py-5">
-                        <p
-                            class="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success"
-                        >
-                            Paid
-                        </p>
-                    </td>
-                @else
-                @endif
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ \App\Enums\ClassroomStatusEnum::getKeyByValue($classroom->status) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                     <button type="button" onclick="location.href='{{ route('admin.classrooms.edit', $classroom->id) }}'"
