@@ -13,7 +13,7 @@ class ProfileController extends Controller
         return view('user.profile',
             [
                 'user' => auth()->user(),
-                'title' => 'Profile Page - ' . config('app.name'),
+                'title' => 'Thông Tin Cá Nhân - ' . config('app.name'),
             ]);
     }
 
@@ -28,6 +28,6 @@ class ProfileController extends Controller
             unset($validatedData['password']);
         }
         $user->update($validatedData);
-        return redirect()->route('home')->with('success', 'Profile updated successfully');
+        return redirect()->route('home')->with('success', 'Chỉnh Sửa Trang Cá Nhân Thành Công!');
     }
 }

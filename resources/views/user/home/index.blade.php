@@ -5,7 +5,7 @@
     <!-- end banner -->
 
     <!-- partner -->
-    <section class="relative w-full xxl:mt-80 my-20 overflow-hidden shadow bg-partner sm:mx-6 sm:rounded-2xl">
+    <section class="relative w-full xxl:mt-80 xl:mt-20 mt-90 my-20 overflow-hidden shadow bg-partner ">
       <div class="flex flex-col items-center justify-center w-full px-6 py-16 space-y-4 text-center sm:px-0">
         <h3 data-aos="flip-down" class="text-2xl font-semibold text-neutral-800">Các Khoá Học Nổi Bật</h3>
         <p data-aos="flip-down" class="paragraph">Tham gia cùng chúng tôi để trải nghiệm các khoá học nào</p>

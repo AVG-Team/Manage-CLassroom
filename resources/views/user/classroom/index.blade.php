@@ -13,30 +13,36 @@
                                          class="object-cover w-full h-full rounded-t-md" alt="Classroom Logo"/>
                                     <div
                                         class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-[#5AB2FF]">
-                                        {{ $class->title }}
+                                        {{ $class->title }} {{ $class->grade }}
                                     </div>
                                 </div>
                                 <div class="relative flex-1">
                                     <div
                                         class="absolute w-[2.8rem] h-[2.8rem] lg:w-[4.5rem] lg:h-[4.5rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem]  right-4  bg-[#5AB2FF]">
                                         <div
-                                            class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-[#FFF9D0]">
+                                            class="absolute inset-0 flex items-center justify-center xl:text-4xl text-xl font-bold text-[#FFF9D0]">
                                             GV
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="ml-3 text-gray-800">
-                                @if ($class->teacher != null)
-                                <h2 class="text-xl font-semibold">{{ $class->teacher->name}}</h2>
-                                @else
-                                <p class="text-red-500">Không có giáo viên được liên kết</p>
-                                @endif
+                                <div class="flex items-center ">
+                                    <h2 class="text-xl font-semibold mr-1 flex justify-center ">{{ $class->teacher->name
+                                        }}</h2>
+                                    @if($class->status == \App\Enums\ClassroomStatusEnum::ACTIVE)
+                                    <div
+                                        class="rounded-full border flex justify-center items-center bg-green-500 p-1"></div>
+                                    @elseif($class->status == \App\Enums\ClassroomStatusEnum::PENDING)
+                                    <div
+                                        class="rounded-full border flex justify-center items-center bg-yellow-500 p-1"></div>
+                                    @endif
+                                </div>
                                 <p class="mt-2 text-sm">
                                     Thời gian : 20:00 - 21:00
                                 </p>
                                 <p class="mt-2 text-sm">
-                                    Toán lớp 12
+                                    {{ $class->title }} {{ $class->grade }}
                                 </p>
                             </div>
                         </a>
@@ -57,30 +63,36 @@
                                  class="object-cover w-full h-full rounded-t-md" alt="Classroom Logo"/>
                             <div
                                 class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-[#5AB2FF]">
-                                {{ $class->title }}
+                                {{ $class->title }} {{ $class->grade }}
                             </div>
                         </div>
                         <div class="relative flex-1">
                             <div
                                 class="absolute w-[2.8rem] h-[2.8rem] lg:w-[4.5rem] lg:h-[4.5rem] overflow-hidden border-2 border-white rounded-full lg:top-[-2.2rem] top-[-1.2rem]  right-4  bg-[#5AB2FF]">
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-[#FFF9D0]">
+                                    class="absolute inset-0 flex items-center justify-center xl:text-4xl text-xl font-bold text-[#FFF9D0]">
                                     GV
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="ml-3 text-gray-800">
-                        @if ($class->teacher != null)
-                        <h2 class="text-xl font-semibold">{{ $class->teacher->name}}</h2>
-                        @else
-                        <p class="text-red-500">Không có giáo viên được liên kết</p>
-                        @endif
+                        <div class="flex items-center ">
+                            <h2 class="text-xl font-semibold mr-1 flex justify-center ">{{ $class->teacher->name
+                                }}</h2>
+                            @if($class->status == \App\Enums\ClassroomStatusEnum::ACTIVE)
+                            <div
+                                class="rounded-full border flex justify-center items-center bg-green-500 p-1"></div>
+                            @elseif($class->status == \App\Enums\ClassroomStatusEnum::PENDING)
+                            <div
+                                class="rounded-full border flex justify-center items-center bg-yellow-500 p-1"></div>
+                            @endif
+                        </div>
                         <p class="mt-2 text-sm">
                             Thời gian : 20:00 - 21:00
                         </p>
                         <p class="mt-2 text-sm">
-                            Toán lớp 12
+                            {{ $class->title }} {{ $class->grade }}
                         </p>
                     </div>
                 </a>

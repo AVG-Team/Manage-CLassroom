@@ -5,63 +5,13 @@ import './hs-apexcharts-helpers.js'
 
 import ApexCharts from "apexcharts";
 
-// ===== chartThree
-const chart03 = () => {
-    const chartThreeOptions = {
-        series: [],
-        chart: {
-            type: "donut",
-            width: 380,
-        },
-        colors: ["#3C50E0", "#6577F3", "#8FD0EF", "#0FADCF"],
-        labels: ["Desktop", "Tablet", "Mobile", "Unknown"],
-        legend: {
-            show: false,
-            position: "bottom",
-        },
-
-        plotOptions: {
-            pie: {
-                donut: {
-                    size: "65%",
-                    background: "transparent",
-                },
-            },
-        },
-
-        dataLabels: {
-            enabled: false,
-        },
-        responsive: [
-            {
-                breakpoint: 640,
-                options: {
-                    chart: {
-                        width: 200,
-                    },
-                },
-            },
-        ],
-    };
-
-    const chartSelector = document.querySelectorAll("#chartThree");
-
-    if (chartSelector.length) {
-        const chartThree = new ApexCharts(
-            document.querySelector("#chartThree"),
-            chartThreeOptions
-        );
-        chartThree.render();
-    }
-};
-
-
-const chart01 = () => {
+const chart01 = (name, labels, data) => {
+    const maxValue = Math.max(...data);
     const chartOneOptions = {
         series: [
             {
-                name: "Doanh Số",
-                data: [107,807,663,163,657,807,406,807,163,807,107,663,0,0,0],
+                name: name,
+                data: data,
             },
         ],
         legend: {
@@ -148,7 +98,7 @@ const chart01 = () => {
         },
         xaxis: {
             type: "category",
-            categories: [1, 1, 2, 2, 3, 3, 4, 5, 7, 8, 9, 10, 10, 10, 10],
+            categories: labels,
             axisBorder: {
                 show: false,
             },
@@ -163,7 +113,7 @@ const chart01 = () => {
                 },
             },
             min: 0,
-            max: 1000,
+            max: maxValue,
         },
     };
 
@@ -175,6 +125,87 @@ const chart01 = () => {
             chartOneOptions
         );
         chartOne.render();
+    }
+};
+
+const chart02 = () => {
+    const chartTwoOptions = {
+        series: [
+            {
+                name: "Sales",
+                data: [44, 55, 41, 67, 22, 43, 65],
+            },
+            {
+                name: "Revenue",
+                data: [13, 23, 20, 8, 13, 27, 15],
+            },
+        ],
+        colors: ["#3056D3", "#80CAEE"],
+        chart: {
+            type: "bar",
+            height: 335,
+            stacked: true,
+            toolbar: {
+                show: false,
+            },
+            zoom: {
+                enabled: false,
+            },
+        },
+
+        responsive: [
+            {
+                breakpoint: 1536,
+                options: {
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 0,
+                            columnWidth: "25%",
+                        },
+                    },
+                },
+            },
+        ],
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                borderRadius: 0,
+                columnWidth: "25%",
+                borderRadiusApplication: "end",
+                borderRadiusWhenStacked: "last",
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+
+        xaxis: {
+            categories: ["M", "T", "W", "T", "F", "S", "S"],
+        },
+        legend: {
+            position: "top",
+            horizontalAlign: "left",
+            fontFamily: "Satoshi",
+            fontWeight: 500,
+            fontSize: "14px",
+
+            markers: {
+                radius: 99,
+            },
+        },
+        fill: {
+            opacity: 1,
+        },
+    };
+
+    const chartSelector = document.querySelectorAll("#chartTwo");
+
+    if (chartSelector.length) {
+        const chartTwo = new ApexCharts(
+            document.querySelector("#chartTwo"),
+            chartTwoOptions
+        );
+        chartTwo.render();
     }
 };
 
@@ -301,87 +332,101 @@ const chart04 = () => {
     }
 };
 
-
-const chart02 = () => {
-    const chartTwoOptions = {
-        series: [
-            {
-                name: "Sales",
-                data: [44, 55, 41, 67, 22, 43, 65],
-            },
-            {
-                name: "Revenue",
-                data: [13, 23, 20, 8, 13, 27, 15],
-            },
-        ],
-        colors: ["#3056D3", "#80CAEE"],
+const chart03 = () => {
+    const chartThreeOptions = {
+        series: [],
         chart: {
-            type: "bar",
-            height: 335,
-            stacked: true,
-            toolbar: {
-                show: false,
-            },
-            zoom: {
-                enabled: false,
+            type: "donut",
+            width: 380,
+        },
+        colors: ["#3C50E0", "#6577F3", "#8FD0EF", "#0FADCF"],
+        labels: ["Desktop", "Tablet", "Mobile", "Unknown"],
+        legend: {
+            show: false,
+            position: "bottom",
+        },
+
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: "65%",
+                    background: "transparent",
+                },
             },
         },
 
+        dataLabels: {
+            enabled: false,
+        },
         responsive: [
             {
-                breakpoint: 1536,
+                breakpoint: 640,
                 options: {
-                    plotOptions: {
-                        bar: {
-                            borderRadius: 0,
-                            columnWidth: "25%",
-                        },
+                    chart: {
+                        width: 200,
                     },
                 },
             },
         ],
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                borderRadius: 0,
-                columnWidth: "25%",
-                borderRadiusApplication: "end",
-                borderRadiusWhenStacked: "last",
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-
-        xaxis: {
-            categories: ["M", "T", "W", "T", "F", "S", "S"],
-        },
-        legend: {
-            position: "top",
-            horizontalAlign: "left",
-            fontFamily: "Satoshi",
-            fontWeight: 500,
-            fontSize: "14px",
-
-            markers: {
-                radius: 99,
-            },
-        },
-        fill: {
-            opacity: 1,
-        },
     };
 
-    const chartSelector = document.querySelectorAll("#chartTwo");
+    const chartSelector = document.querySelectorAll("#chartThree");
 
     if (chartSelector.length) {
-        const chartTwo = new ApexCharts(
-            document.querySelector("#chartTwo"),
-            chartTwoOptions
+        const chartThree = new ApexCharts(
+            document.querySelector("#chartThree"),
+            chartThreeOptions
         );
-        chartTwo.render();
+        chartThree.render();
     }
 };
 document.addEventListener("DOMContentLoaded", function () {
-    chart01();
+    let typeChart = 0;
+    // console.log(apiUrl)
+    function fetchData(type)
+    {
+        console.log(type)
+        axios.get(apiUrl, {
+            params: {
+                type: type
+            }
+        })
+            .then(response => {
+                const data = response.data
+                const labels = data.labels
+                const values = data.total
+                const name = data.name
+                document.getElementById("chartOne").innerHTML = ''
+                chart01(name, labels, values)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    const monthBtn = document.getElementById('month_btn_chart');
+    const yearBtn = document.getElementById('year_btn_chart');
+
+    monthBtn.classList.add('shadow-card');
+    fetchData(typeChart);
+
+    monthBtn.addEventListener('click', function() {
+        if (typeChart !== 0) {
+            typeChart = 0;
+            fetchData(typeChart);
+            monthBtn.classList.add('shadow-card');
+            if(yearBtn.classList.contains('shadow-card'))
+                yearBtn.classList.remove('shadow-card');
+        }
+    });
+
+    yearBtn.addEventListener('click', function() {
+        if (typeChart !== 1) {
+            typeChart = 1;
+            fetchData(typeChart);
+            yearBtn.classList.add('shadow-card');
+            if(monthBtn.classList.contains('shadow-card'))
+                monthBtn.classList.remove('shadow-card');
+        }
+    });
 });

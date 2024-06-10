@@ -32,8 +32,8 @@
                      aria-labelledby="dashboard-tab">
                     <div class="grid gap-4">
                         <div class="w-full bg-blue-400 rounded-lg h-52 flex flex-col justify-center items-center">
-                            <h1 class="text-white text-3xl">{{ $classroom->title }}</h1>
-                            <h1 class="text-white text-3xl mt-2">Giáo viên: {{ $classroom->teacher->name }}</h1>
+                            <h1 class="text-white xl:text-3xl text-xl">{{ $classroom->title }} {{ $classroom->grade }}</h1>
+                            <h1 class="text-white xl:text-3xl text-md mt-2">Giáo viên: {{ $classroom->teacher->name }}</h1>
                         </div>
                         <div class="grid grid-cols-5 gap-3">
                             <div class="w-full p-4 bg-white rounded-lg shadow-md h-36 xl:block hidden">
@@ -44,7 +44,7 @@
                                     @if(auth()->user()->role == \App\Enums\UserRoleEnum::TEACHER)
                                     <x-classroom.layouts.items.createNotify :classroom="$classroom"/>
                                     @endif
-                                    <x-classroom.layouts.items.exerciseNotify/>
+                                    <x-classroom.layouts.items.exerciseNotify :notifications="$notifications"/>
                                     <x-classroom.layouts.items.normalNotify :notifications="$notifications"/>
                                 </div>
                             </div>

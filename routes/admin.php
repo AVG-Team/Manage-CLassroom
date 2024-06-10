@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\DefaultSalaryController;
 use App\Http\Controllers\Admin\ExerciseController;
@@ -88,5 +89,7 @@ Route::group([
 
     Route::get('subject/get-table', [SubjectController::class, "getTableSubject"])->name('subject.table');
     Route::resource('subject', SubjectController::class);
+
+    Route::get('chart-revenue', [ChartController::class, "chartRevenue"])->name('chart-revenue');
 });
 

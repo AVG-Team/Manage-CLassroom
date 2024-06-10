@@ -20,13 +20,51 @@
             <div id="navlinks"
                  class="absolute left-0 z-20 flex-col flex-wrap justify-end invisible w-full gap-6 p-8 transition-all duration-300 origin-top-right scale-90 translate-y-1 bg-white border border-gray-100 shadow-2xl opacity-0 top-full rounded-3xl shadow-gray-600/10 lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none">
                 <div class="w-full text-gray-600 lg:w-auto lg:pr-4 lg:pt-0">
+
                     <ul class="flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
+                        @if(auth()->check())
+                        <li class="w-full lg:hidden">
+                            <div class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                                <span
+                                    class="text-gray-600 font-medium truncate max-w-[9rem]">{{ auth()->user()->name ?? "Anonymous" }}</span>
+
+                            </div>
+                            <div
+                                class="mt-2 space-y-2 font-normal">
+                                @if(auth()->user()->role > 1)
+                                <a class="flex items-center gap-x-3.5 py-2  rounded-lg text-sm text-[#666666] hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                   href="#">
+                                    Quản Lý Trang Web
+                                </a>
+                                @endif
+
+                                <a class="flex items-center gap-x-3.5 py-2  rounded-lg text-sm text-[#666666] hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                   href="{{ route('profile') }}" target="_blank">
+                                    Cập Nhật Hồ Sơ
+                                </a>
+                                <a class="flex items-center gap-x-3.5 py-2  rounded-lg text-sm text-[#666666] hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                   href="{{ route('classroom') }}">
+                                    Vào Lớp Học
+                                </a>
+                            </div>
+                            <hr/>
+                        </li>
+                        @endif
+                        @if(auth()->check())
+                        @if(auth()->user()->role != \App\Enums\UserRoleEnum::TEACHER)
                         <li class="w-full">
                             <a class="md:px-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline whitespace-nowrap"
                                href="{{ route('list-classroom') }}">
                                 Danh sách khoá học
                             </a>
                         </li>
+                        @endif
+                        @endif
                         <li class="w-full">
                             <a class="md:px-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline whitespace-nowrap"
                                href="/classroom">
@@ -45,16 +83,25 @@
                                 Liên hệ
                             </a>
                         </li>
+                        @if(auth()->check())
                         <li class="w-full lg:hidden">
-                            <x-user.form.buttons.primary class="w-full py-3 xl:px-8" onclick="na()">
+                            <a class="md:pr-4 py-2 text-sm bg-transparent rounded-lg text-[#666666] hover:text-gray-900 focus:outline-none focus:shadow-outline whitespace-nowrap"
+                               href="{{ route("logout") }}">
+                            Đăng Xuất
+                            </a>
+                        </li>
+                        @else
+                        <li class="w-full lg:hidden">
+                            <x-user.form.buttons.primary class="w-full py-3 xl:px-8"  onclick="window.open('{{ route('login') }}', '_blank')">
                                 Đăng nhập
                             </x-user.form.buttons.primary>
                         </li>
                         <li class="w-full lg:hidden">
-                            <x-user.form.buttons class="w-full py-3 xl:px-8" onclick="location.href=''">
+                            <x-user.form.buttons class="w-full py-3 xl:px-8" onclick="window.open('{{ route('register') }}', '_blank')">
                                 Đăng ký
                             </x-user.form.buttons>
                         </li>
+                        @endif
                     </ul>
                 </div>
 

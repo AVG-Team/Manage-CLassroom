@@ -28,7 +28,7 @@ class HomeController extends Controller
             $listClassrooms[] = [
                 'id' => $classroom->id,
                 'title' => $classroom->title,
-                'teacher' => $classroom->teacher->name,
+                'teacher' => $classroom->teacher?->name,
                 'total_orders' => $classroom->orders->sum('total'),
                 'total_users' => $classroom->users->count(),
             ];

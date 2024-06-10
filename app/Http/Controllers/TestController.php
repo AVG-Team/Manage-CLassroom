@@ -2,18 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\UserSubscribed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class TestController extends Controller
 {
     public function __invoke()
     {
-        $value = UserSubscribed::all()->pluck('id');
-        $classroomIds = UserSubscribed::whereIn('user_subscribed.id', $value)->where('classrooms.status', 0)
-            ->join('classrooms', 'user_subscribed.classroom_id', '=', 'classrooms.id')
-            ->pluck('classrooms.id')->unique();
+        $name = "Doanh Số";
 
-        return $classrooms;
+        $data = Order::query()
+            ->selectRaw('DAY(created_at) as day, SUM(total) as total_sum')
+            ->whereMonth('created_at', now()->month)
+            ->whereNull('deleted_at')
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get();
+
+        $days = $data->pluck('day');
+        $totals = $data->pluck('total_sum');
+
+        return Response::json([
+            'name' => $name,
+            'day' => $days,
+            'total' => $totals,
+        ]);
     }
 }

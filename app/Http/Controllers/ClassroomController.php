@@ -16,7 +16,7 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::whereNotNull('teacher_id') ->where('status', '<=', 1)->get();
         $user = auth()->user();
         $title = "Classroom";
         return view('user.classroom.index', ['title' => $title], compact('classrooms', 'user'));
@@ -29,7 +29,7 @@ class ClassroomController extends Controller
     }
 
     public function showAll(){
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::whereNotNull('teacher_id') ->where('status', '<=', 1)->get();
         $user = auth()->user();
         $userSubscribed = UserSubscribed::all()->where('user_id', $user->uuid)->where('status', 0);
         $title = "Danh sách lớp học";
@@ -39,14 +39,14 @@ class ClassroomController extends Controller
     public function participate()
     {
         $title = "Participate Classroom";
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::whereNotNull('teacher_id') ->where('status', '<=', 1)->get();
         $user = auth()->user();
         return view('user.classroom.participate', ['title' => $title], compact('classrooms', 'user'));
     }
 
     public function detail($id){
         $title = "Detail Classroom";
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::whereNotNull('teacher_id') ->where('status', '<=', 1)->get();
         $notifications = Notification::where('classroom_id', $id)->get();
         $user = auth()->user();
 
