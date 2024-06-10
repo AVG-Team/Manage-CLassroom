@@ -5,7 +5,7 @@ import {viteStaticCopy} from "vite-plugin-static-copy";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/auth.js', 'resources/js/profile.js', 'resources/css/app.css' , 'resources/js/admin/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/js/auth.js', 'resources/js/profile.js', 'resources/css/app.css' , 'resources/js/admin/app.js', 'resources/js/admin/create-salary.js'],
             refresh: true,
         }),
     ],

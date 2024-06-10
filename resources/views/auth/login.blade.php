@@ -107,7 +107,7 @@
                     </div>
 
                     <!--Forgot password link-->
-                    <a href="#" class="hover:text-secondary-800">Quên mật khẩu?</a>
+                    <a href="{{ route('forgot-password') }}" class="hover:text-secondary-800">Quên mật khẩu?</a>
                 </div>
 
                 <!-- Login button -->
