@@ -50,7 +50,7 @@ class ExerciseController extends Controller
         if ($request->hasFile('uploadFile')) {
             // Lưu tệp vào thư mục storage/exercises
             $uploadedFile = $request->file('uploadFile');
-            $filename = $uploadedFile->store('public/exercises');
+            $filename = $uploadedFile->storeAs('public/exercises', $uploadedFile->getClientOriginalName());
 
             // Lưu tên tệp vào cơ sở dữ liệu
             $exercise->name_file_upload = $uploadedFile->getClientOriginalName();
@@ -97,7 +97,7 @@ class ExerciseController extends Controller
         if ($request->hasFile('uploadFile')) {
             // Lưu tệp vào thư mục storage/exercises
             $uploadedFile = $request->file('uploadFile');
-            $filename = $uploadedFile->store('public/exercises');
+            $filename = $uploadedFile->storeAs('public/exercises', $uploadedFile->getClientOriginalName());
 
             // Lưu tên tệp vào cơ sở dữ liệu
             $exercise->name_file_upload = $uploadedFile->getClientOriginalName();;
