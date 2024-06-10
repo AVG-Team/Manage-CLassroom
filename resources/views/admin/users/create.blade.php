@@ -126,7 +126,8 @@
                                             <label for="gender0" class="text-sm text-gray-500 ms-2">Nữ</label>
                                         </div>
                                         <div class="flex">
-                                            <input type="radio" name="gender" id="gender1" class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                            <input type="radio" name="gender" id="gender1" {{ old('gender') == 1 ? "checked" : "" }} value="1"
+                                                   class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                                             <label for="gender1" class="text-sm text-gray-500 ms-2">Nam</label>
                                         </div>
                                     </div>
