@@ -36,19 +36,7 @@ class ExerciseSeeder extends Seeder
                 'classroom_id' => $classroom->id,
                 'created_at' => now(),
             ];
-
-            $total = $classroom->price == null ? 0 : $classroom->price;
-            $arr1[] = [
-                'user_id' => $userId->uuid,
-                'classroom_id' => $classroom->id,
-                'status' => $faker->randomElement([0, 1]),
-                'created_at' => now(),
-                'updated_at' => now(),
-                'total' => $total,
-                'code_order' => 'AVG' . Str::random(5) . $faker->unique()->randomNumber(8),
-            ];
         }
-        Order::insert($arr1);
         Exercise::insert($arr);
     }
 }

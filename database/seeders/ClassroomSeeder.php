@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRoleEnum;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -18,6 +20,7 @@ class ClassroomSeeder extends Seeder
         $arr = [];
         $faker = \Faker\Factory::create('vi_VN');
         $categoryIds = Subject::pluck('id')->toArray();
+        $users = User::query()->where('role', UserRoleEnum::TEACHER)->pluck('uuid')->toArray();
         for ($i = 1; $i <= 10; $i++) {
             $arr[] = [
                 'title' => $faker->randomElement(["Toán","Văn","Anh"]),
@@ -26,6 +29,10 @@ class ClassroomSeeder extends Seeder
                 'status' => $faker->randomElement([0, 1]),
                 'price' => $faker->randomFloat(2, 1, 1000),
                 'subject_id' => $faker->randomElement($categoryIds),
+                'created_at' => now(),
+                'grade' => $faker->randomElement([6, 7, 8, 9, 10,11,12]),
+                'capacity' => 15,
+                'teacher_id' => $faker->randomElement($users),
             ];
         }
         Classroom::insert($arr);
