@@ -42,6 +42,12 @@
                                     Quản Lý Trang Web
                                 </a>
                                 @endif
+                                @if(auth()->user()->role == \App\Enums\UserRoleEnum::TEACHER)
+                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                   href="{{ route('salary', auth()->user()->uuid) }}">
+                                    Bảng Lương
+                                </a>
+                                @endif
 
                                 <a class="flex items-center gap-x-3.5 py-2  rounded-lg text-sm text-[#666666] hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
                                    href="{{ route('profile') }}" target="_blank">
@@ -134,7 +140,12 @@
                                             Quản Lý Trang Web
                                         </a>
                                     @endif
-
+                                    @if(auth()->user()->role == \App\Enums\UserRoleEnum::TEACHER)
+                                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
+                                           href="{{ route('salary', auth()->user()->uuid) }}">
+                                            Bảng Lương
+                                        </a>
+                                    @endif
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400"
                                        href="{{ route('profile') }}" target="_blank">
                                         Cập Nhật Hồ Sơ
