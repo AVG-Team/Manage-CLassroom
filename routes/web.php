@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::group([
     Route::post('/classroom/detail/{classroom}', [NotificationController::class, "store"])->name('notification.store');
     Route::get('/classroom/all-exercises', [ExerciseController::class, "showAll"])->name('all-exercises');
     Route::get('/list-classroom', [ClassroomController::class, "showAll"])->name('list-classroom');
+    Route::get('/salary/{user}', [SalaryController::class, "showSalary"])->name('salary');
 });
 
 

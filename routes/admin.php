@@ -11,10 +11,12 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SalaryController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\UsersSubscribedController;
 use App\Http\Middleware\CheckAnonymousAdminMiddleware;
 use App\Http\Middleware\CheckLoginAdminMiddleware;
 use Illuminate\Support\Facades\Route;
+
 
 Route::group([
     "middleware" => CheckAnonymousAdminMiddleware::class,
@@ -91,5 +93,6 @@ Route::group([
     Route::resource('subject', SubjectController::class);
 
     Route::get('chart-revenue', [ChartController::class, "chartRevenue"])->name('chart-revenue');
+    Route::get('notifications', [NotificationController::class, "index"])->name('notification.index');
 });
 

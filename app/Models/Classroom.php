@@ -58,4 +58,9 @@ class Classroom extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

@@ -100,7 +100,7 @@ class User extends Authenticatable
 
     public function salaries(): HasMany
     {
-        return $this->hasMany(Salary::class);
+        return $this->hasMany(Salary::class,'user_id');
     }
 
     public function classrooms(): BelongsToMany
