@@ -144,3 +144,7 @@ Breadcrumbs::for('admin.subjects.edit', function (BreadcrumbTrail $trail, $subje
     $trail->parent('admin.subjects');
     $trail->push('Chỉnh Sửa Môn Học', route('admin.subject.edit', $subject));
 });
+Breadcrumbs::for('admin.notifications', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home');
+    $trail->push('Bảng Thông Báo', route('admin.notification.index'));
+});
