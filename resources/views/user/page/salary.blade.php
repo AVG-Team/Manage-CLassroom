@@ -32,9 +32,9 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $salary->user->name }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">Tháng {{ $salary->created_at->format('m') - 1 }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->payday }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->defaultSalary->salary }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->bonus }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->bonus }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->bonus }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{{ $salary->bonus + $salary->defaultSalary->salary  }}</td>
                                             @if($salary->status == \App\Enums\SalaryStatusEnum::PENDING)
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 ">Chưa Thanh Toán</td>
                                             @elseif($salary->status == \App\Enums\SalaryStatusEnum::APPROVE)
